@@ -1,23 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://0pxk3tcg3l60"]
+[gd_scene load_steps=7 format=3 uid="uid://0pxk3tcg3l60"]
 
 [ext_resource type="Texture2D" uid="uid://bt831vrq318j1" path="res://rocky_roads/Enemies/slime_blue.png" id="1_3s1pi"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nct4o"]
-
-[sub_resource type="Animation" id="Animation_4mgmp"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 2]
-}
 
 [sub_resource type="Animation" id="Animation_v7rqd"]
 length = 0.001
@@ -34,13 +18,33 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_4mgmp"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f6kmi"]
 _data = {
 "RESET": SubResource("Animation_v7rqd"),
 "idle": SubResource("Animation_4mgmp")
 }
 
-[node name="Player" type="RigidBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rm3u"]
+size = Vector2(12, 7)
+
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_nct4o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -49,6 +53,11 @@ hframes = 5
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 2.0
 libraries = {
 "": SubResource("AnimationLibrary_f6kmi")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_0rm3u")
