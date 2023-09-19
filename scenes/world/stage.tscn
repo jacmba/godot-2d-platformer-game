@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bf7b1n21ao4je"]
+[gd_scene load_steps=12 format=3 uid="uid://bf7b1n21ao4je"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_gi8ks"]
 [ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="2_amc0b"]
 [ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="2_jrnl7"]
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="4_5j00f"]
+[ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="5_3cmro"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_gbeb3"]
 tile_data = PackedInt32Array(0, 131072, 1, 1, 196608, 1, 2, 262144, 1, 3, 327680, 1)
@@ -196,6 +197,12 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[node name="coin" parent="." instance=ExtResource("5_3cmro")]
+position = Vector2(-88, 8)
+
+[node name="coin2" parent="." instance=ExtResource("5_3cmro")]
+position = Vector2(24, 24)
 
 [node name="Player" parent="." instance=ExtResource("2_jrnl7")]
 position = Vector2(-48, -8)
