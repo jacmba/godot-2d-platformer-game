@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bf7b1n21ao4je"]
+[gd_scene load_steps=25 format=3 uid="uid://bf7b1n21ao4je"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_gi8ks"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_5xhx6"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bbdfsjc0vrx5n" path="res://rocky_roads/Objects/coin_gold.png" id="4_x54li"]
 [ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="5_3cmro"]
 [ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="5_8wgg7"]
+[ext_resource type="Script" path="res://scripts/deadZone.gd" id="9_cytmb"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_gbeb3"]
 tile_data = PackedInt32Array(0, 131072, 1, 1, 196608, 1, 2, 262144, 1, 3, 327680, 1)
@@ -183,6 +184,21 @@ font_size = 12
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_nq1pc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_x0akn"]
 resource_name = "shine"
 length = 1.25
@@ -200,7 +216,13 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_nq1pc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_68lno"]
+_data = {
+"RESET": SubResource("Animation_nq1pc"),
+"shine": SubResource("Animation_x0akn")
+}
+
+[sub_resource type="Animation" id="Animation_70vri"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -213,12 +235,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_68lno"]
-_data = {
-"RESET": SubResource("Animation_nq1pc"),
-"shine": SubResource("Animation_x0akn")
 }
 
 [sub_resource type="Animation" id="Animation_tpktm"]
@@ -238,41 +254,29 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_70vri"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xdx75"]
 _data = {
 "RESET": SubResource("Animation_70vri"),
 "wave": SubResource("Animation_tpktm")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83pxt"]
+size = Vector2(512, 104)
+
 [node name="stage" type="TileMap"]
 tile_set = SubResource("TileSet_t2dct")
 format = 2
 layer_0/tile_data = PackedInt32Array(196602, 65536, 3, 131070, 327680, 2, 131071, 393216, 2, 196607, 393216, 3, 262138, 65536, 4, 262139, 131072, 4, 262140, 196608, 4, 262141, 262144, 4, 262143, 393216, 4, 262142, 327680, 4, 196603, 131072, 3, 196604, 196608, 3, 196605, 262144, 3, 196606, 327680, 3, 131069, 262144, 2, 131068, 196608, 2, 131066, 65536, 2, 131067, 131072, 2, 65531, 131072, 1, 65532, 196608, 1, 65533, 262144, 1, 65534, 327680, 1, 1, 524288, 1, 131073, 524288, 3, 131074, 589824, 3, 131075, 655360, 3, -5, 131072, 0, -3, 196608, 0, -2, 327680, 0, 65535, 393216, 1, 7, 65536, 2, 65543, 65536, 3, 131079, 65536, 3, 196615, 65536, 3, 262151, 65536, 4, 262152, 131072, 4, 262153, 196608, 4, 8, 196608, 1, 9, 262144, 1, 65544, 262144, 3, 131080, 262144, 3, 196616, 262144, 3, 65545, 196608, 3, 131081, 262144, 3, 196617, 262144, 3, -262153, 1, 0, -262152, 65537, 0, -262151, 131073, 0, -131076, 1, 2, -131075, 65537, 2, -131074, 131073, 2, -327678, 131073, 1, -327679, 65537, 1, -327680, 1, 1, -196615, 1, 0, -196614, 65537, 0, -196613, 131073, 1, -65528, 2, 1)
 
-[node name="HUD" type="AspectRatioContainer" parent="." groups=["coin_listeners"]]
-offset_left = -144.0
-offset_top = -80.0
-offset_right = 144.0
-offset_bottom = 80.0
+[node name="HUD" type="CanvasLayer" parent="." groups=["coin_listeners", "dead_zone_listeners"]]
+follow_viewport_enabled = true
 script = ExtResource("4_t5sev")
 
 [node name="CoinCounter" type="Label" parent="HUD"]
-layout_mode = 2
+offset_left = -120.0
+offset_top = -72.0
+offset_right = -113.0
+offset_bottom = -55.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 16
@@ -281,58 +285,75 @@ label_settings = SubResource("LabelSettings_20vpd")
 vertical_alignment = 1
 
 [node name="CoinIcon" type="Sprite2D" parent="HUD"]
-position = Vector2(16, 16)
-scale = Vector2(1, 1)
+position = Vector2(-128, -64)
 texture = ExtResource("4_x54li")
 hframes = 8
 
-[node name="Background" type="Node2D" parent="."]
+[node name="Scenery" type="Node" parent="."]
+
+[node name="Background" type="Node2D" parent="Scenery"]
 show_behind_parent = true
 z_index = -100
 z_as_relative = false
 
-[node name="Sky" type="Sprite2D" parent="Background"]
+[node name="Sky" type="Sprite2D" parent="Scenery/Background"]
 position = Vector2(4.76837e-06, -40)
 scale = Vector2(1.3125, 8)
 texture = ExtResource("2_amc0b")
 
-[node name="Sun" type="Sprite2D" parent="Background"]
+[node name="Sun" type="Sprite2D" parent="Scenery/Background"]
 position = Vector2(120, -64)
 scale = Vector2(0.78125, 1)
 texture = ExtResource("5_8wgg7")
 hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Sun"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Scenery/Background/Sun"]
 autoplay = "shine"
 libraries = {
 "": SubResource("AnimationLibrary_68lno")
 }
 
-[node name="Trees" type="Sprite2D" parent="Background"]
+[node name="Trees" type="Sprite2D" parent="Scenery/Background"]
 position = Vector2(0, -24)
 scale = Vector2(1.1875, 0.988281)
 texture = ExtResource("4_5j00f")
 
-[node name="Water" type="Sprite2D" parent="Background"]
+[node name="Water" type="Sprite2D" parent="Scenery/Background"]
 position = Vector2(0, 48)
 scale = Vector2(9.5, 1)
 texture = ExtResource("2_amc0b")
 hframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Water"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Scenery/Background/Water"]
 autoplay = "wave"
 libraries = {
 "": SubResource("AnimationLibrary_xdx75")
 }
 
+[node name="Areas" type="Node" parent="Scenery"]
+
+[node name="DeadZone" type="Area2D" parent="Scenery/Areas"]
+collision_mask = 512
+script = ExtResource("9_cytmb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/Areas/DeadZone"]
+position = Vector2(0, 140)
+shape = SubResource("RectangleShape2D_83pxt")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 
-[node name="coin" parent="." groups=["coins"] instance=ExtResource("5_3cmro")]
+[node name="Objects" type="Node" parent="."]
+
+[node name="Coins" type="Node" parent="Objects"]
+
+[node name="coin" parent="Objects/Coins" groups=["coins"] instance=ExtResource("5_3cmro")]
 position = Vector2(-88, 8)
 
-[node name="coin2" parent="." groups=["coins"] instance=ExtResource("5_3cmro")]
+[node name="coin2" parent="Objects/Coins" groups=["coins"] instance=ExtResource("5_3cmro")]
 position = Vector2(24, 24)
 
 [node name="Player" parent="." instance=ExtResource("2_jrnl7")]
 position = Vector2(-48, -8)
+
+[connection signal="body_entered" from="Scenery/Areas/DeadZone" to="Scenery/Areas/DeadZone" method="_on_zone_entered"]
