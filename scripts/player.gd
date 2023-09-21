@@ -21,7 +21,7 @@ func _process(_delta):
 	else:
 		motion = lerp(motion, 0.0, 0.1)
 		
-	if abs(motion) > 0:
+	if abs(motion) > 0.1:
 		$Sprite2D.flip_h = motion > 0
 		$AnimationPlayer.play("walk")
 	else:

@@ -68,6 +68,7 @@ script = ExtResource("1_nct4o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3s1pi")
+flip_h = true
 hframes = 5
 vframes = 2
 
