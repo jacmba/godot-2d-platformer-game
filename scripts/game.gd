@@ -8,14 +8,11 @@ var coins = 0
 @onready var coin_counter: Label = $CoinCounter
 @onready var stage_coins = coin_list.get_child_count()
 
-signal dead
-
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().change_scene_to_file("res://scenes/world/menu.tscn")
 		
 func die():
-	dead.emit()
 	get_parent().get_node("Timers/DeathTimer").start()
 
 func _on_coin_collected():
@@ -37,6 +34,6 @@ func _on_stage_clear_timeout():
 
 func _on_death_timer_timeout():
 	get_tree().reload_current_scene()
-
-func _on_spike_body_entered(_body):
+	
+func _on_dead():
 	die()

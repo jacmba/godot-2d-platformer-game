@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://co2i0mciyr0iq"]
+[gd_scene load_steps=32 format=3 uid="uid://co2i0mciyr0iq"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_2ovgi"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_pqsag"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/game.gd" id="4_f4v5h"]
 [ext_resource type="Texture2D" uid="uid://bbdfsjc0vrx5n" path="res://rocky_roads/Objects/coin_gold.png" id="5_mpl0l"]
 [ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="6_fs0h5"]
+[ext_resource type="PackedScene" uid="uid://dctac3vkoen7a" path="res://scenes/packed/game_cam.tscn" id="7_3ju5u"]
 [ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_7c3wp"]
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_sm4ft"]
 [ext_resource type="Script" path="res://scripts/deadZone.gd" id="9_ecnlw"]
@@ -292,7 +293,7 @@ tile_set = SubResource("TileSet_t2dct")
 format = 2
 layer_0/tile_data = PackedInt32Array(-327678, 131073, 1, -327679, 65537, 1, -327680, 1, 1, -196615, 1, 0, -196614, 65537, 0, -196613, 131073, 1, 65544, 2, 1, -262153, 1, 0, -262152, 65537, 0, -262151, 131073, 0, -131076, 1, 2, -131075, 65537, 2, -131074, 131073, 2, 131076, 131072, 1, 196612, 65536, 3, 262148, 65536, 4, 131077, 196608, 1, 196613, 262144, 3, 262149, 131072, 4, 131078, 262144, 1, 196614, 196608, 3, 262150, 196608, 4, 131079, 196608, 1, 196615, 262144, 3, 262151, 131072, 4, 131080, 262144, 1, 196616, 262144, 3, 262152, 196608, 4, -65536, 524288, 3, -65535, 589824, 3, -9, 196608, 1, 65527, 262144, 3, 131063, 262144, 3, 196599, 262144, 3, 262135, 262144, 3, 327671, 196608, 4, -8, 262144, 1, 65528, 262144, 3, 131064, 196608, 2, 196600, 262144, 2, 262136, 262144, 3, 327672, 262144, 4, -7, 196608, 1, 65529, 262144, 3, 131065, 262144, 3, 196601, 262144, 3, 262137, 262144, 3, 327673, 131072, 4, -6, 327680, 1, 65530, 393216, 3, 131066, 327680, 2, 196602, 262144, 3, 262138, 262144, 3, 327674, 196608, 4, 131067, 262144, 1, 196603, 262144, 3, 262139, 262144, 3, 327675, 196608, 4, 131068, 196608, 1, 196604, 262144, 3, 262140, 262144, 3, 327676, 131072, 4, 131069, 262144, 1, 196605, 327680, 3, 262141, 196608, 3, 327677, 262144, 4, 131070, 327680, 1, 196606, 393216, 3, 262142, 393216, 3, 327678, 393216, 4)
 
-[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners"]]
+[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners", "death_listeners"]]
 follow_viewport_enabled = true
 script = ExtResource("4_f4v5h")
 coin_list = NodePath("../Objects/Coins")
@@ -366,8 +367,7 @@ script = ExtResource("9_ecnlw")
 position = Vector2(0, 140)
 shape = SubResource("RectangleShape2D_83pxt")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+[node name="GameCam" parent="." instance=ExtResource("7_3ju5u")]
 
 [node name="Objects" type="Node" parent="."]
 
@@ -391,7 +391,16 @@ one_shot = true
 [node name="DeathTimer" type="Timer" parent="Timers"]
 one_shot = true
 
-[connection signal="dead" from="HUD" to="Player" method="_on_dead"]
+[node name="Boundaries" type="Node" parent="."]
+
+[node name="Top" type="Node2D" parent="Boundaries"]
+
+[node name="Bottom" type="Node2D" parent="Boundaries"]
+
+[node name="Left" type="Node2D" parent="Boundaries"]
+
+[node name="Right" type="Node2D" parent="Boundaries"]
+
 [connection signal="body_entered" from="Scenery/Areas/DeadZone" to="Scenery/Areas/DeadZone" method="_on_zone_entered"]
 [connection signal="timeout" from="Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
 [connection signal="timeout" from="Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]

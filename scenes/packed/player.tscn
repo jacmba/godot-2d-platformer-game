@@ -78,7 +78,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rm3u"]
 size = Vector2(12, 7)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["death_listeners"]]
 collision_layer = 512
 script = ExtResource("1_nct4o")
 

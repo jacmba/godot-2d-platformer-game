@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bl3sooxy5ngip"]
+[gd_scene load_steps=35 format=3 uid="uid://bl3sooxy5ngip"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_i24mc"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_s7crp"]
@@ -8,8 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="6_spcl7"]
 [ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_655ll"]
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_jvdso"]
+[ext_resource type="PackedScene" uid="uid://dctac3vkoen7a" path="res://scenes/packed/game_cam.tscn" id="9_fajyd"]
 [ext_resource type="Script" path="res://scripts/deadZone.gd" id="9_o07et"]
 [ext_resource type="Texture2D" uid="uid://qpykc73otcha" path="res://rocky_roads/Enemies/spikes.png" id="10_r2ggb"]
+[ext_resource type="Script" path="res://scripts/death_trigger.gd" id="10_t6f2l"]
 [ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_xgq10"]
 [ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="11_k5ejf"]
 
@@ -305,7 +307,7 @@ tile_set = SubResource("TileSet_t2dct")
 format = 2
 layer_0/tile_data = PackedInt32Array(-327678, 131073, 1, -327679, 65537, 1, -327680, 1, 1, -196615, 1, 0, -196614, 65537, 0, -196613, 131073, 1, 65544, 2, 1, -262153, 1, 0, -262152, 65537, 0, -262151, 131073, 0, -131076, 524288, 3, -131075, 589824, 3, 131077, 196608, 1, 196613, 262144, 3, 262149, 131072, 4, 131078, 262144, 1, 196614, 196608, 3, 262150, 196608, 4, 131079, 196608, 1, 196615, 262144, 3, 262151, 131072, 4, 131080, 262144, 1, 196616, 262144, 3, 262152, 196608, 4, 131076, 196608, 1, 131075, 196608, 1, 131074, 196608, 1, 131073, 262144, 1, 131072, 262144, 1, 196607, 65536, 2, 262143, 65536, 3, 327679, 65536, 4, 262144, 131072, 4, 262145, 131072, 4, 262146, 131072, 4, 262147, 131072, 4, 262148, 131072, 4, 196608, 262144, 3, 196609, 262144, 3, 196610, 262144, 3, 196611, 262144, 3, 196612, 262144, 3, -65535, 524288, 3, -65534, 589824, 3, 196598, 262144, 1, 262134, 262144, 3, 327670, 196608, 2, 196599, 196608, 1, 262135, 262144, 3, 327671, 262144, 3, 196600, 327680, 1, 262136, 393216, 3, 327672, 327680, 2, 327673, 262144, 1, 327674, 196608, 1, 327675, 262144, 1, 327676, 327680, 1)
 
-[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners"]]
+[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners", "death_listeners"]]
 follow_viewport_enabled = true
 script = ExtResource("4_n6q47")
 coin_list = NodePath("../Objects/Coins")
@@ -384,6 +386,7 @@ shape = SubResource("RectangleShape2D_83pxt")
 [node name="SpikeSet" type="Area2D" parent="Scenery/Areas/Spikes"]
 position = Vector2(-104, 60)
 collision_mask = 512
+script = ExtResource("10_t6f2l")
 
 [node name="Sprite2D" type="Sprite2D" parent="Scenery/Areas/Spikes/SpikeSet"]
 position = Vector2(8, -8.5)
@@ -396,8 +399,7 @@ frame = 1
 position = Vector2(8, -2)
 shape = SubResource("RectangleShape2D_cl3vc")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+[node name="GameCam" parent="." instance=ExtResource("9_fajyd")]
 
 [node name="Objects" type="Node" parent="."]
 
@@ -424,8 +426,17 @@ one_shot = true
 [node name="DeathTimer" type="Timer" parent="Timers"]
 one_shot = true
 
-[connection signal="dead" from="HUD" to="Player" method="_on_dead"]
+[node name="Boundaries" type="Node" parent="."]
+
+[node name="Top" type="Node2D" parent="Boundaries"]
+
+[node name="Bottom" type="Node2D" parent="Boundaries"]
+
+[node name="Left" type="Node2D" parent="Boundaries"]
+
+[node name="Right" type="Node2D" parent="Boundaries"]
+
 [connection signal="body_entered" from="Scenery/Areas/DeadZone" to="Scenery/Areas/DeadZone" method="_on_zone_entered"]
-[connection signal="body_entered" from="Scenery/Areas/Spikes/SpikeSet" to="HUD" method="_on_spike_body_entered"]
+[connection signal="body_entered" from="Scenery/Areas/Spikes/SpikeSet" to="Scenery/Areas/Spikes/SpikeSet" method="_on_trigger_entered"]
 [connection signal="timeout" from="Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
 [connection signal="timeout" from="Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]
