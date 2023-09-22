@@ -214,12 +214,6 @@ pattern_4 = SubResource("TileMapPattern_quxct")
 pattern_5 = SubResource("TileMapPattern_yurt0")
 pattern_6 = SubResource("TileMapPattern_wgn22")
 
-[sub_resource type="LabelSettings" id="LabelSettings_20vpd"]
-line_spacing = 0.0
-font_size = 12
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_nq1pc"]
 length = 0.001
 tracks/0/type = "value"
@@ -302,15 +296,131 @@ size = Vector2(512, 104)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl3vc"]
 size = Vector2(22, 12)
 
-[node name="Stage" type="TileMap"]
+[sub_resource type="LabelSettings" id="LabelSettings_20vpd"]
+line_spacing = 0.0
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Level" type="Node"]
+
+[node name="Stage" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_t2dct")
 format = 2
 layer_0/tile_data = PackedInt32Array(-327678, 131073, 1, -327679, 65537, 1, -327680, 1, 1, -196615, 1, 0, -196614, 65537, 0, -196613, 131073, 1, 65544, 2, 1, -262153, 1, 0, -262152, 65537, 0, -262151, 131073, 0, -131076, 524288, 3, -131075, 589824, 3, 131077, 196608, 1, 196613, 262144, 3, 262149, 131072, 4, 131078, 262144, 1, 196614, 196608, 3, 262150, 196608, 4, 131079, 196608, 1, 196615, 262144, 3, 262151, 131072, 4, 131080, 262144, 1, 196616, 262144, 3, 262152, 196608, 4, 131076, 196608, 1, 131075, 196608, 1, 131074, 196608, 1, 131073, 262144, 1, 131072, 262144, 1, 196607, 65536, 2, 262143, 65536, 3, 327679, 65536, 4, 262144, 131072, 4, 262145, 131072, 4, 262146, 131072, 4, 262147, 131072, 4, 262148, 131072, 4, 196608, 262144, 3, 196609, 262144, 3, 196610, 262144, 3, 196611, 262144, 3, 196612, 262144, 3, -65535, 524288, 3, -65534, 589824, 3, 196598, 262144, 1, 262134, 262144, 3, 327670, 196608, 2, 196599, 196608, 1, 262135, 262144, 3, 327671, 262144, 3, 196600, 327680, 1, 262136, 393216, 3, 327672, 327680, 2, 327673, 262144, 1, 327674, 196608, 1, 327675, 262144, 1, 327676, 327680, 1)
 
+[node name="Scenery" type="Node" parent="Stage"]
+
+[node name="Background" type="Node2D" parent="Stage/Scenery"]
+show_behind_parent = true
+z_index = -100
+z_as_relative = false
+
+[node name="Sky" type="Sprite2D" parent="Stage/Scenery/Background"]
+position = Vector2(4.76837e-06, -40)
+scale = Vector2(1.3125, 8)
+texture = ExtResource("6_spcl7")
+
+[node name="Sun" type="Sprite2D" parent="Stage/Scenery/Background"]
+position = Vector2(120, -64)
+scale = Vector2(0.78125, 1)
+texture = ExtResource("7_655ll")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Stage/Scenery/Background/Sun"]
+autoplay = "shine"
+libraries = {
+"": SubResource("AnimationLibrary_68lno")
+}
+
+[node name="Trees" type="Sprite2D" parent="Stage/Scenery/Background"]
+position = Vector2(0, -24)
+scale = Vector2(1.1875, 0.988281)
+texture = ExtResource("8_jvdso")
+
+[node name="Water" type="Sprite2D" parent="Stage/Scenery/Background"]
+position = Vector2(0, 48)
+scale = Vector2(9.5, 1)
+texture = ExtResource("6_spcl7")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Stage/Scenery/Background/Water"]
+autoplay = "wave"
+libraries = {
+"": SubResource("AnimationLibrary_xdx75")
+}
+
+[node name="Areas" type="Node" parent="Stage/Scenery"]
+
+[node name="DeadZone" type="Area2D" parent="Stage/Scenery/Areas"]
+collision_mask = 512
+script = ExtResource("9_o07et")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Areas/DeadZone"]
+position = Vector2(0, 140)
+shape = SubResource("RectangleShape2D_83pxt")
+
+[node name="Spikes" type="Node" parent="Stage/Scenery/Areas"]
+
+[node name="SpikeSet" type="Area2D" parent="Stage/Scenery/Areas/Spikes"]
+position = Vector2(-104, 60)
+collision_mask = 512
+script = ExtResource("10_t6f2l")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet"]
+position = Vector2(8, -8.5)
+scale = Vector2(2, 1.5625)
+texture = ExtResource("10_r2ggb")
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet"]
+position = Vector2(8, -2)
+shape = SubResource("RectangleShape2D_cl3vc")
+
+[node name="GameCam" parent="Stage" instance=ExtResource("9_fajyd")]
+
+[node name="Objects" type="Node" parent="Stage"]
+
+[node name="Coins" type="Node" parent="Stage/Objects"]
+
+[node name="Coin" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(112, 0)
+
+[node name="Coin2" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(-49, -56)
+
+[node name="Coin3" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(-95, 32)
+
+[node name="Player" parent="Stage" instance=ExtResource("11_k5ejf")]
+position = Vector2(-133, 24)
+
+[node name="Timers" type="Node" parent="Stage"]
+
+[node name="StageClearTimer" type="Timer" parent="Stage/Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="Stage/Timers"]
+one_shot = true
+
+[node name="Boundaries" type="Node" parent="Stage"]
+
+[node name="Top" type="Node2D" parent="Stage/Boundaries"]
+
+[node name="Bottom" type="Node2D" parent="Stage/Boundaries"]
+
+[node name="Left" type="Node2D" parent="Stage/Boundaries"]
+
+[node name="Right" type="Node2D" parent="Stage/Boundaries"]
+
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners", "death_listeners"]]
-follow_viewport_enabled = true
+offset = Vector2(600, 300)
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 600, 300)
 script = ExtResource("4_n6q47")
-coin_list = NodePath("../Objects/Coins")
+coin_list = NodePath("../Stage/Objects/Coins")
 stage = 2
 
 [node name="CoinCounter" type="Label" parent="HUD"]
@@ -330,113 +440,7 @@ position = Vector2(-128, -64)
 texture = ExtResource("5_ct0n7")
 hframes = 8
 
-[node name="Scenery" type="Node" parent="."]
-
-[node name="Background" type="Node2D" parent="Scenery"]
-show_behind_parent = true
-z_index = -100
-z_as_relative = false
-
-[node name="Sky" type="Sprite2D" parent="Scenery/Background"]
-position = Vector2(4.76837e-06, -40)
-scale = Vector2(1.3125, 8)
-texture = ExtResource("6_spcl7")
-
-[node name="Sun" type="Sprite2D" parent="Scenery/Background"]
-position = Vector2(120, -64)
-scale = Vector2(0.78125, 1)
-texture = ExtResource("7_655ll")
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Scenery/Background/Sun"]
-autoplay = "shine"
-libraries = {
-"": SubResource("AnimationLibrary_68lno")
-}
-
-[node name="Trees" type="Sprite2D" parent="Scenery/Background"]
-position = Vector2(0, -24)
-scale = Vector2(1.1875, 0.988281)
-texture = ExtResource("8_jvdso")
-
-[node name="Water" type="Sprite2D" parent="Scenery/Background"]
-position = Vector2(0, 48)
-scale = Vector2(9.5, 1)
-texture = ExtResource("6_spcl7")
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Scenery/Background/Water"]
-autoplay = "wave"
-libraries = {
-"": SubResource("AnimationLibrary_xdx75")
-}
-
-[node name="Areas" type="Node" parent="Scenery"]
-
-[node name="DeadZone" type="Area2D" parent="Scenery/Areas"]
-collision_mask = 512
-script = ExtResource("9_o07et")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/Areas/DeadZone"]
-position = Vector2(0, 140)
-shape = SubResource("RectangleShape2D_83pxt")
-
-[node name="Spikes" type="Node" parent="Scenery/Areas"]
-
-[node name="SpikeSet" type="Area2D" parent="Scenery/Areas/Spikes"]
-position = Vector2(-104, 60)
-collision_mask = 512
-script = ExtResource("10_t6f2l")
-
-[node name="Sprite2D" type="Sprite2D" parent="Scenery/Areas/Spikes/SpikeSet"]
-position = Vector2(8, -8.5)
-scale = Vector2(2, 1.5625)
-texture = ExtResource("10_r2ggb")
-hframes = 4
-frame = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/Areas/Spikes/SpikeSet"]
-position = Vector2(8, -2)
-shape = SubResource("RectangleShape2D_cl3vc")
-
-[node name="GameCam" parent="." instance=ExtResource("9_fajyd")]
-
-[node name="Objects" type="Node" parent="."]
-
-[node name="Coins" type="Node" parent="Objects"]
-
-[node name="Coin" parent="Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
-position = Vector2(112, 0)
-
-[node name="Coin2" parent="Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
-position = Vector2(-49, -56)
-
-[node name="Coin3" parent="Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
-position = Vector2(-95, 32)
-
-[node name="Player" parent="." instance=ExtResource("11_k5ejf")]
-position = Vector2(-133, 24)
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="StageClearTimer" type="Timer" parent="Timers"]
-wait_time = 0.5
-one_shot = true
-
-[node name="DeathTimer" type="Timer" parent="Timers"]
-one_shot = true
-
-[node name="Boundaries" type="Node" parent="."]
-
-[node name="Top" type="Node2D" parent="Boundaries"]
-
-[node name="Bottom" type="Node2D" parent="Boundaries"]
-
-[node name="Left" type="Node2D" parent="Boundaries"]
-
-[node name="Right" type="Node2D" parent="Boundaries"]
-
-[connection signal="body_entered" from="Scenery/Areas/DeadZone" to="Scenery/Areas/DeadZone" method="_on_zone_entered"]
-[connection signal="body_entered" from="Scenery/Areas/Spikes/SpikeSet" to="Scenery/Areas/Spikes/SpikeSet" method="_on_trigger_entered"]
-[connection signal="timeout" from="Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
-[connection signal="timeout" from="Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]
+[connection signal="body_entered" from="Stage/Scenery/Areas/DeadZone" to="Stage/Scenery/Areas/DeadZone" method="_on_zone_entered"]
+[connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet" to="Stage/Scenery/Areas/Spikes/SpikeSet" method="_on_trigger_entered"]
+[connection signal="timeout" from="Stage/Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
+[connection signal="timeout" from="Stage/Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]

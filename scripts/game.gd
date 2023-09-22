@@ -13,14 +13,14 @@ func _process(_delta):
 		get_tree().change_scene_to_file("res://scenes/world/menu.tscn")
 		
 func die():
-	get_parent().get_node("Timers/DeathTimer").start()
+	get_parent().get_node("Stage/Timers/DeathTimer").start()
 
 func _on_coin_collected():
 	coins += 1
 	coin_counter.text = str(coins)
 	
 	if coins == stage_coins:
-		get_parent().get_node("Timers/StageClearTimer").start()
+		get_parent().get_node("Stage/Timers/StageClearTimer").start()
 
 func _on_dead_zone_entered():
 	die()
