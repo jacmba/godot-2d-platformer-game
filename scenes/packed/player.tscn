@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://0pxk3tcg3l60"]
+[gd_scene load_steps=9 format=3 uid="uid://0pxk3tcg3l60"]
 
 [ext_resource type="Texture2D" uid="uid://bt831vrq318j1" path="res://rocky_roads/Enemies/slime_blue.png" id="1_3s1pi"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nct4o"]
@@ -52,9 +52,25 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_0towg"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.8),
+"transitions": PackedFloat32Array(0.267943, 0.170755, 0.196146, 0.241484),
+"update": 1,
+"values": [3, 4, 5, 6]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f6kmi"]
 _data = {
 "RESET": SubResource("Animation_v7rqd"),
+"die": SubResource("Animation_0towg"),
 "idle": SubResource("Animation_4mgmp"),
 "walk": SubResource("Animation_743wu")
 }

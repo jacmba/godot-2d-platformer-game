@@ -6,14 +6,19 @@ const gravity = 600
 
 var h_velocity
 var motion: float
+var dead
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationPlayer.play("idle")
 	motion = 0
+	dead = false
 	
 func _process(_delta):
+	if dead:
+		return
+		
 	if Input.is_action_pressed("move_right"):
 		motion = lerp(motion, 1.0, 0.1)
 	elif Input.is_action_pressed("move_left"):
@@ -35,5 +40,11 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if not dead and Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -jump_force
+		
+func _on_dead():
+	dead = true
+	remove_child($CollisionShape2D)
+	velocity.y = -jump_force
+	$AnimationPlayer.play("die")

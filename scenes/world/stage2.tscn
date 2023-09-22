@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_2ovgi"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_pqsag"]
 [ext_resource type="Texture2D" uid="uid://csktloilix5ai" path="res://rocky_roads/Objects/sign.png" id="3_gbhb7"]
-[ext_resource type="Script" path="res://scripts/inventory.gd" id="4_y3568"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="4_f4v5h"]
 [ext_resource type="Texture2D" uid="uid://bbdfsjc0vrx5n" path="res://rocky_roads/Objects/coin_gold.png" id="5_mpl0l"]
 [ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="6_fs0h5"]
 [ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_7c3wp"]
@@ -294,7 +294,7 @@ layer_0/tile_data = PackedInt32Array(-327678, 131073, 1, -327679, 65537, 1, -327
 
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners"]]
 follow_viewport_enabled = true
-script = ExtResource("4_y3568")
+script = ExtResource("4_f4v5h")
 coin_list = NodePath("../Objects/Coins")
 stage = 2
 
@@ -388,5 +388,10 @@ position = Vector2(-117, -24)
 wait_time = 0.5
 one_shot = true
 
+[node name="DeathTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="dead" from="HUD" to="Player" method="_on_dead"]
 [connection signal="body_entered" from="Scenery/Areas/DeadZone" to="Scenery/Areas/DeadZone" method="_on_zone_entered"]
 [connection signal="timeout" from="Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
+[connection signal="timeout" from="Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]

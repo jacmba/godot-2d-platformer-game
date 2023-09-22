@@ -1,22 +1,41 @@
-[gd_scene load_steps=25 format=3 uid="uid://bf7b1n21ao4je"]
+[gd_scene load_steps=33 format=3 uid="uid://bl3sooxy5ngip"]
 
-[ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_k4m6h"]
-[ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_yosi7"]
-[ext_resource type="Texture2D" uid="uid://csktloilix5ai" path="res://rocky_roads/Objects/sign.png" id="3_r0x3a"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="4_yvmst"]
-[ext_resource type="Texture2D" uid="uid://bbdfsjc0vrx5n" path="res://rocky_roads/Objects/coin_gold.png" id="5_gxutl"]
-[ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="6_unc1m"]
-[ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_md4jf"]
-[ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_ypsck"]
-[ext_resource type="Script" path="res://scripts/deadZone.gd" id="9_oc30r"]
-[ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_y0l7i"]
-[ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="11_o0esj"]
+[ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_i24mc"]
+[ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_s7crp"]
+[ext_resource type="Texture2D" uid="uid://csktloilix5ai" path="res://rocky_roads/Objects/sign.png" id="3_bhegj"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="4_n6q47"]
+[ext_resource type="Texture2D" uid="uid://bbdfsjc0vrx5n" path="res://rocky_roads/Objects/coin_gold.png" id="5_ct0n7"]
+[ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="6_spcl7"]
+[ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_655ll"]
+[ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_jvdso"]
+[ext_resource type="Script" path="res://scripts/deadZone.gd" id="9_o07et"]
+[ext_resource type="Texture2D" uid="uid://qpykc73otcha" path="res://rocky_roads/Enemies/spikes.png" id="10_r2ggb"]
+[ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_xgq10"]
+[ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="11_k5ejf"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_gbeb3"]
 tile_data = PackedInt32Array(0, 131072, 1, 1, 196608, 1, 2, 262144, 1, 3, 327680, 1)
 
+[sub_resource type="TileMapPattern" id="TileMapPattern_dv27v"]
+tile_data = PackedInt32Array(0, 1, 0, 1, 65537, 0, 2, 131073, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_jd4x8"]
+tile_data = PackedInt32Array(0, 1, 2, 1, 65537, 2, 2, 131073, 2)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_g1xo1"]
+tile_data = PackedInt32Array(0, 131072, 1, 65536, 65536, 3, 131072, 65536, 4, 1, 196608, 1, 65537, 262144, 3, 131073, 131072, 4, 2, 262144, 1, 65538, 196608, 3, 131074, 196608, 4, 3, 196608, 1, 65539, 262144, 3, 131075, 131072, 4, 4, 262144, 1, 65540, 262144, 3, 131076, 196608, 4)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_quxct"]
+tile_data = PackedInt32Array(0, 524288, 3, 1, 589824, 3)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_yurt0"]
+tile_data = PackedInt32Array(0, 196608, 1, 65536, 262144, 3, 131072, 262144, 3, 196608, 262144, 3, 262144, 262144, 3, 327680, 196608, 4, 1, 262144, 1, 65537, 262144, 3, 131073, 196608, 2, 196609, 262144, 2, 262145, 262144, 3, 327681, 262144, 4, 2, 196608, 1, 65538, 262144, 3, 131074, 262144, 3, 196610, 262144, 3, 262146, 262144, 3, 327682, 131072, 4, 3, 327680, 1, 65539, 393216, 3, 131075, 393216, 3, 196611, 393216, 3, 262147, 393216, 3, 327683, 393216, 4)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_wgn22"]
+tile_data = PackedInt32Array(0, 196608, 1, 65536, 262144, 3, 131072, 262144, 3, 196608, 262144, 3, 262144, 262144, 3, 327680, 196608, 4, 1, 262144, 1, 65537, 262144, 3, 131073, 196608, 2, 196609, 262144, 2, 262145, 262144, 3, 327681, 262144, 4, 2, 196608, 1, 65538, 262144, 3, 131074, 262144, 3, 196610, 262144, 3, 262146, 262144, 3, 327682, 131072, 4, 3, 327680, 1, 65539, 393216, 3, 131075, 327680, 2, 196611, 262144, 3, 262147, 262144, 3, 327683, 196608, 4, 131076, 262144, 1, 196612, 262144, 3, 262148, 262144, 3, 327684, 196608, 4, 131077, 196608, 1, 196613, 262144, 3, 262149, 262144, 3, 327685, 131072, 4, 131078, 262144, 1, 196614, 327680, 3, 262150, 196608, 3, 327686, 262144, 4, 131079, 327680, 1, 196615, 393216, 3, 262151, 393216, 3, 327687, 393216, 4)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvna7"]
-texture = ExtResource("1_k4m6h")
+texture = ExtResource("1_i24mc")
 2:0/0 = 0
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
@@ -125,9 +144,18 @@ texture = ExtResource("1_k4m6h")
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hfrqj"]
-texture = ExtResource("2_yosi7")
+texture = ExtResource("2_s7crp")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -163,7 +191,7 @@ texture = ExtResource("2_yosi7")
 3:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_15wa2"]
-texture = ExtResource("3_r0x3a")
+texture = ExtResource("3_bhegj")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -177,6 +205,12 @@ sources/0 = SubResource("TileSetAtlasSource_uvna7")
 sources/1 = SubResource("TileSetAtlasSource_hfrqj")
 sources/2 = SubResource("TileSetAtlasSource_15wa2")
 pattern_0 = SubResource("TileMapPattern_gbeb3")
+pattern_1 = SubResource("TileMapPattern_dv27v")
+pattern_2 = SubResource("TileMapPattern_jd4x8")
+pattern_3 = SubResource("TileMapPattern_g1xo1")
+pattern_4 = SubResource("TileMapPattern_quxct")
+pattern_5 = SubResource("TileMapPattern_yurt0")
+pattern_6 = SubResource("TileMapPattern_wgn22")
 
 [sub_resource type="LabelSettings" id="LabelSettings_20vpd"]
 line_spacing = 0.0
@@ -263,16 +297,19 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_83pxt"]
 size = Vector2(512, 104)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cl3vc"]
+size = Vector2(22, 12)
+
 [node name="Stage" type="TileMap"]
 tile_set = SubResource("TileSet_t2dct")
 format = 2
-layer_0/tile_data = PackedInt32Array(196602, 65536, 3, 131070, 327680, 2, 131071, 393216, 2, 196607, 393216, 3, 262138, 65536, 4, 262139, 131072, 4, 262140, 196608, 4, 262141, 262144, 4, 262143, 393216, 4, 262142, 327680, 4, 196603, 131072, 3, 196604, 196608, 3, 196605, 262144, 3, 196606, 327680, 3, 131069, 262144, 2, 131068, 196608, 2, 131066, 65536, 2, 131067, 131072, 2, 65531, 131072, 1, 65532, 196608, 1, 65533, 262144, 1, 65534, 327680, 1, 1, 524288, 1, 131073, 524288, 3, 131074, 589824, 3, 131075, 655360, 3, -5, 131072, 0, -3, 196608, 0, -2, 327680, 0, 65535, 393216, 1, 7, 65536, 2, 65543, 65536, 3, 131079, 65536, 3, 196615, 65536, 3, 262151, 65536, 4, 262152, 131072, 4, 262153, 196608, 4, 8, 196608, 1, 9, 262144, 1, 65544, 262144, 3, 131080, 262144, 3, 196616, 262144, 3, 65545, 196608, 3, 131081, 262144, 3, 196617, 262144, 3, -262153, 1, 0, -262152, 65537, 0, -262151, 131073, 0, -131076, 1, 2, -131075, 65537, 2, -131074, 131073, 2, -327678, 131073, 1, -327679, 65537, 1, -327680, 1, 1, -196615, 1, 0, -196614, 65537, 0, -196613, 131073, 1, -65528, 2, 1)
+layer_0/tile_data = PackedInt32Array(-327678, 131073, 1, -327679, 65537, 1, -327680, 1, 1, -196615, 1, 0, -196614, 65537, 0, -196613, 131073, 1, 65544, 2, 1, -262153, 1, 0, -262152, 65537, 0, -262151, 131073, 0, -131076, 524288, 3, -131075, 589824, 3, 131077, 196608, 1, 196613, 262144, 3, 262149, 131072, 4, 131078, 262144, 1, 196614, 196608, 3, 262150, 196608, 4, 131079, 196608, 1, 196615, 262144, 3, 262151, 131072, 4, 131080, 262144, 1, 196616, 262144, 3, 262152, 196608, 4, 131076, 196608, 1, 131075, 196608, 1, 131074, 196608, 1, 131073, 262144, 1, 131072, 262144, 1, 196607, 65536, 2, 262143, 65536, 3, 327679, 65536, 4, 262144, 131072, 4, 262145, 131072, 4, 262146, 131072, 4, 262147, 131072, 4, 262148, 131072, 4, 196608, 262144, 3, 196609, 262144, 3, 196610, 262144, 3, 196611, 262144, 3, 196612, 262144, 3, -65535, 524288, 3, -65534, 589824, 3, 196598, 262144, 1, 262134, 262144, 3, 327670, 196608, 2, 196599, 196608, 1, 262135, 262144, 3, 327671, 262144, 3, 196600, 327680, 1, 262136, 393216, 3, 327672, 327680, 2, 327673, 262144, 1, 327674, 196608, 1, 327675, 262144, 1, 327676, 327680, 1)
 
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners"]]
 follow_viewport_enabled = true
-script = ExtResource("4_yvmst")
+script = ExtResource("4_n6q47")
 coin_list = NodePath("../Objects/Coins")
-stage = 1
+stage = 2
 
 [node name="CoinCounter" type="Label" parent="HUD"]
 offset_left = -120.0
@@ -288,7 +325,7 @@ vertical_alignment = 1
 
 [node name="CoinIcon" type="Sprite2D" parent="HUD"]
 position = Vector2(-128, -64)
-texture = ExtResource("5_gxutl")
+texture = ExtResource("5_ct0n7")
 hframes = 8
 
 [node name="Scenery" type="Node" parent="."]
@@ -301,12 +338,12 @@ z_as_relative = false
 [node name="Sky" type="Sprite2D" parent="Scenery/Background"]
 position = Vector2(4.76837e-06, -40)
 scale = Vector2(1.3125, 8)
-texture = ExtResource("6_unc1m")
+texture = ExtResource("6_spcl7")
 
 [node name="Sun" type="Sprite2D" parent="Scenery/Background"]
 position = Vector2(120, -64)
 scale = Vector2(0.78125, 1)
-texture = ExtResource("7_md4jf")
+texture = ExtResource("7_655ll")
 hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Scenery/Background/Sun"]
@@ -318,12 +355,12 @@ libraries = {
 [node name="Trees" type="Sprite2D" parent="Scenery/Background"]
 position = Vector2(0, -24)
 scale = Vector2(1.1875, 0.988281)
-texture = ExtResource("8_ypsck")
+texture = ExtResource("8_jvdso")
 
 [node name="Water" type="Sprite2D" parent="Scenery/Background"]
 position = Vector2(0, 48)
 scale = Vector2(9.5, 1)
-texture = ExtResource("6_unc1m")
+texture = ExtResource("6_spcl7")
 hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Scenery/Background/Water"]
@@ -336,11 +373,28 @@ libraries = {
 
 [node name="DeadZone" type="Area2D" parent="Scenery/Areas"]
 collision_mask = 512
-script = ExtResource("9_oc30r")
+script = ExtResource("9_o07et")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/Areas/DeadZone"]
 position = Vector2(0, 140)
 shape = SubResource("RectangleShape2D_83pxt")
+
+[node name="Spikes" type="Node" parent="Scenery/Areas"]
+
+[node name="SpikeSet" type="Area2D" parent="Scenery/Areas/Spikes"]
+position = Vector2(-104, 60)
+collision_mask = 512
+
+[node name="Sprite2D" type="Sprite2D" parent="Scenery/Areas/Spikes/SpikeSet"]
+position = Vector2(8, -8.5)
+scale = Vector2(2, 1.5625)
+texture = ExtResource("10_r2ggb")
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/Areas/Spikes/SpikeSet"]
+position = Vector2(8, -2)
+shape = SubResource("RectangleShape2D_cl3vc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -349,14 +403,17 @@ zoom = Vector2(4, 4)
 
 [node name="Coins" type="Node" parent="Objects"]
 
-[node name="Coin" parent="Objects/Coins" groups=["coins"] instance=ExtResource("10_y0l7i")]
-position = Vector2(-88, 8)
+[node name="Coin" parent="Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(112, 0)
 
-[node name="Coin2" parent="Objects/Coins" groups=["coins"] instance=ExtResource("10_y0l7i")]
-position = Vector2(24, 24)
+[node name="Coin2" parent="Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(-49, -56)
 
-[node name="Player" parent="." instance=ExtResource("11_o0esj")]
-position = Vector2(-48, -8)
+[node name="Coin3" parent="Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(-95, 32)
+
+[node name="Player" parent="." instance=ExtResource("11_k5ejf")]
+position = Vector2(-133, 24)
 
 [node name="Timers" type="Node" parent="."]
 
@@ -369,5 +426,6 @@ one_shot = true
 
 [connection signal="dead" from="HUD" to="Player" method="_on_dead"]
 [connection signal="body_entered" from="Scenery/Areas/DeadZone" to="Scenery/Areas/DeadZone" method="_on_zone_entered"]
+[connection signal="body_entered" from="Scenery/Areas/Spikes/SpikeSet" to="HUD" method="_on_spike_body_entered"]
 [connection signal="timeout" from="Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
 [connection signal="timeout" from="Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]
