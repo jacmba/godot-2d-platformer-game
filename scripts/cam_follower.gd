@@ -17,13 +17,7 @@ func _process(delta):
 	if boundaries == null:
 		print("Can't get reference to scenery boundaries")
 	else:
-		if target_position.y < top_boundary:
-			target_position.y = position.y
-		elif target_position.y > bottom_boundary:
-			target_position.y = position.y
-		if target_position.x < left_boundary:
-			target_position.x = position.x
-		elif target_position.x > right_boundary:
-			target_position.x = position.x
+		target_position.y = clamp(target_position.y, top_boundary, bottom_boundary)
+		target_position.x = clamp(target_position.x, left_boundary, right_boundary)
 	
 	position = target_position

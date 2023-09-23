@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bl3sooxy5ngip"]
+[gd_scene load_steps=33 format=3 uid="uid://bl3sooxy5ngip"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_i24mc"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_s7crp"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_655ll"]
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_jvdso"]
 [ext_resource type="PackedScene" uid="uid://dctac3vkoen7a" path="res://scenes/packed/game_cam.tscn" id="9_fajyd"]
-[ext_resource type="Script" path="res://scripts/deadZone.gd" id="9_o07et"]
 [ext_resource type="Texture2D" uid="uid://qpykc73otcha" path="res://rocky_roads/Enemies/spikes.png" id="10_r2ggb"]
 [ext_resource type="Script" path="res://scripts/death_trigger.gd" id="10_t6f2l"]
 [ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_xgq10"]
@@ -214,6 +213,9 @@ pattern_4 = SubResource("TileMapPattern_quxct")
 pattern_5 = SubResource("TileMapPattern_yurt0")
 pattern_6 = SubResource("TileMapPattern_wgn22")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cl3vc"]
+size = Vector2(22, 12)
+
 [sub_resource type="Animation" id="Animation_nq1pc"]
 length = 0.001
 tracks/0/type = "value"
@@ -290,12 +292,6 @@ _data = {
 "wave": SubResource("Animation_tpktm")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_83pxt"]
-size = Vector2(512, 104)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cl3vc"]
-size = Vector2(22, 12)
-
 [sub_resource type="LabelSettings" id="LabelSettings_20vpd"]
 line_spacing = 0.0
 font_size = 12
@@ -307,58 +303,36 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Stage" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_t2dct")
 format = 2
-layer_0/tile_data = PackedInt32Array(-327678, 131073, 1, -327679, 65537, 1, -327680, 1, 1, -196615, 1, 0, -196614, 65537, 0, -196613, 131073, 1, 65544, 2, 1, -262153, 1, 0, -262152, 65537, 0, -262151, 131073, 0, -131076, 524288, 3, -131075, 589824, 3, 131077, 196608, 1, 196613, 262144, 3, 262149, 131072, 4, 131078, 262144, 1, 196614, 196608, 3, 262150, 196608, 4, 131079, 196608, 1, 196615, 262144, 3, 262151, 131072, 4, 131080, 262144, 1, 196616, 262144, 3, 262152, 196608, 4, 131076, 196608, 1, 131075, 196608, 1, 131074, 196608, 1, 131073, 262144, 1, 131072, 262144, 1, 196607, 65536, 2, 262143, 65536, 3, 327679, 65536, 4, 262144, 131072, 4, 262145, 131072, 4, 262146, 131072, 4, 262147, 131072, 4, 262148, 131072, 4, 196608, 262144, 3, 196609, 262144, 3, 196610, 262144, 3, 196611, 262144, 3, 196612, 262144, 3, -65535, 524288, 3, -65534, 589824, 3, 196598, 262144, 1, 262134, 262144, 3, 327670, 196608, 2, 196599, 196608, 1, 262135, 262144, 3, 327671, 262144, 3, 196600, 327680, 1, 262136, 393216, 3, 327672, 327680, 2, 327673, 262144, 1, 327674, 196608, 1, 327675, 262144, 1, 327676, 327680, 1)
+layer_0/tile_data = PackedInt32Array(-327678, 131073, 1, -327679, 65537, 1, -327680, 1, 1, -196615, 1, 0, -196614, 65537, 0, -196613, 131073, 1, -262153, 1, 0, -262152, 65537, 0, -262151, 131073, 0, -131076, 524288, 3, -131075, 589824, 3, 131077, 196608, 1, 196613, 262144, 3, 262149, 131072, 4, 131078, 262144, 1, 196614, 196608, 3, 262150, 196608, 4, 131079, 196608, 1, 196615, 262144, 3, 262151, 131072, 4, 131080, 262144, 1, 196616, 262144, 3, 262152, 196608, 4, 131076, 196608, 1, 131075, 196608, 1, 131074, 196608, 1, 131073, 262144, 1, 131072, 262144, 1, 196607, 65536, 2, 262143, 65536, 3, 327679, 65536, 4, 262144, 131072, 4, 262145, 131072, 4, 262146, 131072, 4, 262147, 131072, 4, 262148, 131072, 4, 196608, 262144, 3, 196609, 262144, 3, 196610, 196608, 2, 196611, 262144, 3, 196612, 262144, 3, -65535, 524288, 3, -65534, 589824, 3, 196598, 262144, 1, 262134, 262144, 3, 327670, 196608, 2, 196599, 196608, 1, 262135, 262144, 3, 327671, 262144, 3, 196600, 327680, 1, 262136, 393216, 3, 327672, 327680, 2, 327673, 262144, 1, 327674, 196608, 1, 327675, 262144, 1, 327676, 327680, 1, 131081, 262144, 1, 131082, 327680, 1, 196618, 393216, 3, 262154, 393216, 4, 196617, 262144, 3, 262153, 196608, 4, -65520, 524288, 1, -196589, 131072, 1, -196588, 196608, 1, -196587, 262144, 1, -196586, 327680, 1, -65511, 131072, 1, -65510, 196608, 1, -65509, 262144, 1, -65508, 327680, 1, 33, 196608, 1, 65569, 262144, 3, 131105, 262144, 3, 196641, 262144, 3, 262177, 262144, 3, 327713, 196608, 4, 34, 262144, 1, 65570, 262144, 3, 131106, 196608, 2, 196642, 262144, 2, 262178, 262144, 3, 327714, 262144, 4, 35, 196608, 1, 65571, 262144, 3, 131107, 262144, 3, 196643, 262144, 3, 262179, 262144, 3, 327715, 131072, 4, 36, 327680, 1, 65572, 393216, 3, 131108, 393216, 3, 196644, 393216, 3, 262180, 393216, 3, 327716, 393216, 4, 32, 131072, 1, 327712, 65536, 4, 262176, 65536, 3, 196640, 65536, 3, 131104, 65536, 3, 65568, 65536, 3, 196650, 65536, 4, 131114, 65536, 3, 65578, 65536, 2, 65579, 131072, 2, 43, 131072, 1, 44, 131072, 2, -65492, 131072, 1, -65491, 327680, 1, 45, 327680, 2, 46, 196608, 1, 47, 262144, 1, 48, 393216, 2, 65584, 393216, 3, 131120, 393216, 3, 196656, 393216, 4, 196651, 262144, 4, 196652, 262144, 4, 196653, 262144, 4, 196654, 262144, 4, 196655, 262144, 4, 131115, 262144, 3, 131116, 131072, 3, 65580, 262144, 3, 65581, 262144, 2, 65582, 262144, 3, 65583, 327680, 3, 131119, 262144, 3, 131118, 262144, 3, 131117, 196608, 3, -131033, 524288, 1, -65489, 2, 1, -327673, 1, 0, -327672, 65537, 0, -327671, 131073, 0, -458730, 1, 0, -458729, 65537, 0, -458728, 131073, 0, -327650, 1, 0, -327649, 65537, 0, -327648, 131073, 0, -393172, 1, 0, -393171, 65537, 0, -393170, 131073, 0, -458715, 1, 2, -458714, 65537, 2, -458713, 131073, 2, -393200, 1, 2, -393199, 65537, 2, -393198, 131073, 2, -524284, 1, 2, -524283, 65537, 2, -524282, 131073, 2, -131061, 589824, 3, -131060, 524288, 1, -131059, 524288, 1, 65549, 524288, 1)
 
 [node name="Scenery" type="Node" parent="Stage"]
 
 [node name="Background" type="Node2D" parent="Stage/Scenery"]
 show_behind_parent = true
-z_index = -100
+z_index = -90
 z_as_relative = false
-
-[node name="Sky" type="Sprite2D" parent="Stage/Scenery/Background"]
-position = Vector2(4.76837e-06, -40)
-scale = Vector2(1.3125, 8)
-texture = ExtResource("6_spcl7")
-
-[node name="Sun" type="Sprite2D" parent="Stage/Scenery/Background"]
-position = Vector2(120, -64)
-scale = Vector2(0.78125, 1)
-texture = ExtResource("7_655ll")
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Stage/Scenery/Background/Sun"]
-autoplay = "shine"
-libraries = {
-"": SubResource("AnimationLibrary_68lno")
-}
 
 [node name="Trees" type="Sprite2D" parent="Stage/Scenery/Background"]
 position = Vector2(0, -24)
 scale = Vector2(1.1875, 0.988281)
 texture = ExtResource("8_jvdso")
 
-[node name="Water" type="Sprite2D" parent="Stage/Scenery/Background"]
-position = Vector2(0, 48)
-scale = Vector2(9.5, 1)
-texture = ExtResource("6_spcl7")
-hframes = 8
+[node name="Trees2" type="Sprite2D" parent="Stage/Scenery/Background"]
+position = Vector2(304, -24)
+scale = Vector2(1.1875, 0.988281)
+texture = ExtResource("8_jvdso")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Stage/Scenery/Background/Water"]
-autoplay = "wave"
-libraries = {
-"": SubResource("AnimationLibrary_xdx75")
-}
+[node name="Trees3" type="Sprite2D" parent="Stage/Scenery/Background"]
+position = Vector2(608, -24)
+scale = Vector2(1.1875, 0.988281)
+texture = ExtResource("8_jvdso")
+
+[node name="Trees4" type="Sprite2D" parent="Stage/Scenery/Background"]
+position = Vector2(912, -24)
+scale = Vector2(1.1875, 0.988281)
+texture = ExtResource("8_jvdso")
 
 [node name="Areas" type="Node" parent="Stage/Scenery"]
-
-[node name="DeadZone" type="Area2D" parent="Stage/Scenery/Areas"]
-collision_mask = 512
-script = ExtResource("9_o07et")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Areas/DeadZone"]
-position = Vector2(0, 140)
-shape = SubResource("RectangleShape2D_83pxt")
 
 [node name="Spikes" type="Node" parent="Stage/Scenery/Areas"]
 
@@ -378,7 +352,87 @@ frame = 1
 position = Vector2(8, -2)
 shape = SubResource("RectangleShape2D_cl3vc")
 
+[node name="SpikeSet2" type="Area2D" parent="Stage/Scenery/Areas/Spikes"]
+position = Vector2(184, -35)
+collision_mask = 512
+script = ExtResource("10_t6f2l")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet2"]
+position = Vector2(8, -8.5)
+scale = Vector2(2, 1.5625)
+texture = ExtResource("10_r2ggb")
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet2"]
+position = Vector2(8, -2)
+shape = SubResource("RectangleShape2D_cl3vc")
+
+[node name="SpikeSet3" type="Area2D" parent="Stage/Scenery/Areas/Spikes"]
+position = Vector2(424, -20)
+collision_mask = 512
+script = ExtResource("10_t6f2l")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet3"]
+position = Vector2(8, -8.5)
+scale = Vector2(2, 1.5625)
+texture = ExtResource("10_r2ggb")
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet3"]
+position = Vector2(8, -2)
+shape = SubResource("RectangleShape2D_cl3vc")
+
+[node name="SpikeSet4" type="Area2D" parent="Stage/Scenery/Areas/Spikes"]
+position = Vector2(544, -4)
+collision_mask = 512
+script = ExtResource("10_t6f2l")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet4"]
+position = Vector2(8, -8.5)
+scale = Vector2(2, 1.5625)
+texture = ExtResource("10_r2ggb")
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet4"]
+position = Vector2(8, -2)
+shape = SubResource("RectangleShape2D_cl3vc")
+
 [node name="GameCam" parent="Stage" instance=ExtResource("9_fajyd")]
+
+[node name="Background" type="Node2D" parent="Stage/GameCam"]
+z_index = -100
+
+[node name="Sky" type="Sprite2D" parent="Stage/GameCam/Background"]
+position = Vector2(4.76837e-06, -40)
+scale = Vector2(1.3125, 8)
+texture = ExtResource("6_spcl7")
+
+[node name="Sun" type="Sprite2D" parent="Stage/GameCam/Background"]
+position = Vector2(120, -64)
+scale = Vector2(0.78125, 1)
+texture = ExtResource("7_655ll")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Stage/GameCam/Background/Sun"]
+autoplay = "shine"
+libraries = {
+"": SubResource("AnimationLibrary_68lno")
+}
+
+[node name="Water" type="Sprite2D" parent="Stage/GameCam/Background"]
+position = Vector2(0, 48)
+scale = Vector2(9.5, 1)
+texture = ExtResource("6_spcl7")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Stage/GameCam/Background/Water"]
+autoplay = "wave"
+libraries = {
+"": SubResource("AnimationLibrary_xdx75")
+}
 
 [node name="Objects" type="Node" parent="Stage"]
 
@@ -392,6 +446,18 @@ position = Vector2(-49, -56)
 
 [node name="Coin3" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
 position = Vector2(-95, 32)
+
+[node name="Coin4" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(192, -64)
+
+[node name="Coin5" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(432, -48)
+
+[node name="Coin6" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(600, -40)
+
+[node name="Coin7" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
+position = Vector2(744, -40)
 
 [node name="Player" parent="Stage" instance=ExtResource("11_k5ejf")]
 position = Vector2(-133, 24)
@@ -414,6 +480,7 @@ one_shot = true
 [node name="Left" type="Node2D" parent="Stage/Boundaries"]
 
 [node name="Right" type="Node2D" parent="Stage/Boundaries"]
+position = Vector2(640, 0)
 
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners", "death_listeners"]]
 offset = Vector2(600, 300)
@@ -440,7 +507,9 @@ position = Vector2(-128, -64)
 texture = ExtResource("5_ct0n7")
 hframes = 8
 
-[connection signal="body_entered" from="Stage/Scenery/Areas/DeadZone" to="Stage/Scenery/Areas/DeadZone" method="_on_zone_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet" to="Stage/Scenery/Areas/Spikes/SpikeSet" method="_on_trigger_entered"]
+[connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet2" to="Stage/Scenery/Areas/Spikes/SpikeSet2" method="_on_trigger_entered"]
+[connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet3" to="Stage/Scenery/Areas/Spikes/SpikeSet3" method="_on_trigger_entered"]
+[connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet4" to="Stage/Scenery/Areas/Spikes/SpikeSet4" method="_on_trigger_entered"]
 [connection signal="timeout" from="Stage/Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
 [connection signal="timeout" from="Stage/Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]

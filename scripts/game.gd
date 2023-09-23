@@ -10,10 +10,13 @@ var coins = 0
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
-		get_tree().change_scene_to_file("res://scenes/world/menu.tscn")
+		exit_to_menu()
 		
 func die():
 	get_parent().get_node("Stage/Timers/DeathTimer").start()
+	
+func exit_to_menu():
+	get_tree().change_scene_to_file("res://scenes/world/menu.tscn")
 
 func _on_coin_collected():
 	coins += 1
@@ -30,7 +33,7 @@ func _on_stage_clear_timeout():
 	if FileAccess.file_exists(file_name):
 		get_tree().change_scene_to_file(file_name)
 	else:
-		get_tree().change_scene_to_file("res://scenes/world/menu.tscn")
+		exit_to_menu()
 
 func _on_death_timer_timeout():
 	get_tree().reload_current_scene()
