@@ -44,6 +44,12 @@ func _physics_process(delta):
 		velocity.y = -jump_force
 		
 func _on_dead():
+	die()
+	
+func _on_dead_zone_entered():
+	die()
+	
+func die():
 	dead = true
 	remove_child($CollisionShape2D)
 	velocity.y = -jump_force
