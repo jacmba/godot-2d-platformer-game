@@ -3,6 +3,7 @@ extends CharacterBody2D
 const speed = 4000
 const jump_force = 250
 const gravity = 600
+const terminal_speed = 5000
 
 var h_velocity
 var motion: float
@@ -37,6 +38,8 @@ func _process(_delta):
 func _physics_process(delta):	
 	velocity.x = motion * speed * delta
 	velocity.y += delta * gravity
+	
+	velocity.y = clamp(velocity.y, -10000, terminal_speed)
 	
 	move_and_slide()
 	
