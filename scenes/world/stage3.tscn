@@ -407,6 +407,9 @@ shape = SubResource("RectangleShape2D_cl3vc")
 [node name="Saw" parent="Stage/Scenery/Areas/Saws" instance=ExtResource("14_k8jp1")]
 position = Vector2(336, -56)
 
+[node name="Saw2" parent="Stage/Scenery/Areas/Saws" instance=ExtResource("14_k8jp1")]
+position = Vector2(488, -25)
+
 [node name="GameCam" parent="Stage" instance=ExtResource("9_fajyd")]
 
 [node name="Background" type="Node2D" parent="Stage/GameCam"]
@@ -497,6 +500,10 @@ speed = 1000
 
 [node name="SlimeEnemy2" parent="Stage/Enemies" instance=ExtResource("15_618wg")]
 position = Vector2(40, -24)
+speed = 1000
+
+[node name="SlimeEnemy3" parent="Stage/Enemies" instance=ExtResource("15_618wg")]
+position = Vector2(728, -24)
 speed = 1000
 
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners", "death_listeners"]]
