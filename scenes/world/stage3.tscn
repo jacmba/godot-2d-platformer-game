@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bl3sooxy5ngip"]
+[gd_scene load_steps=36 format=3 uid="uid://bl3sooxy5ngip"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_i24mc"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_s7crp"]
@@ -218,6 +218,9 @@ pattern_6 = SubResource("TileMapPattern_wgn22")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl3vc"]
 size = Vector2(22, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgk8v"]
+size = Vector2(80, 104)
+
 [sub_resource type="Animation" id="Animation_nq1pc"]
 length = 0.001
 tracks/0/type = "value"
@@ -410,6 +413,15 @@ position = Vector2(336, -56)
 [node name="Saw2" parent="Stage/Scenery/Areas/Saws" instance=ExtResource("14_k8jp1")]
 position = Vector2(488, -25)
 
+[node name="Goal" type="Area2D" parent="Stage/Scenery"]
+position = Vector2(768, -37)
+collision_layer = 32768
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Goal"]
+position = Vector2(24, -11)
+shape = SubResource("RectangleShape2D_mgk8v")
+
 [node name="GameCam" parent="Stage" instance=ExtResource("9_fajyd")]
 
 [node name="Background" type="Node2D" parent="Stage/GameCam"]
@@ -506,14 +518,11 @@ speed = 1000
 position = Vector2(728, -24)
 speed = 1000
 
-[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("coin_list") groups=["coin_listeners", "dead_zone_listeners", "death_listeners"]]
-visible = false
+[node name="HUD" type="CanvasLayer" parent="." groups=["coin_listeners", "dead_zone_listeners", "death_listeners"]]
 offset = Vector2(600, 300)
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 600, 300)
 script = ExtResource("4_n6q47")
-coin_list = NodePath("../Stage/Objects/Coins")
-stage = 2
 
 [node name="CoinCounter" type="Label" parent="HUD"]
 offset_left = -120.0
@@ -536,5 +545,6 @@ hframes = 8
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet2" to="Stage/Scenery/Areas/Spikes/SpikeSet2" method="_on_trigger_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet3" to="Stage/Scenery/Areas/Spikes/SpikeSet3" method="_on_trigger_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet4" to="Stage/Scenery/Areas/Spikes/SpikeSet4" method="_on_trigger_entered"]
+[connection signal="body_entered" from="Stage/Scenery/Goal" to="HUD" method="_on_goal_entered"]
 [connection signal="timeout" from="Stage/Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
 [connection signal="timeout" from="Stage/Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]

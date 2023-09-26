@@ -81,6 +81,7 @@ size = Vector2(12, 7)
 [node name="Player" type="CharacterBody2D" groups=["dead_zone_listeners", "death_listeners"]]
 z_index = 10
 collision_layer = 512
+collision_mask = 32769
 script = ExtResource("1_nct4o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
