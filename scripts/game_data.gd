@@ -1,7 +1,7 @@
 class_name GameData
 
 const INITIAL_LIVES: int = 3
-const MAX_HEALTH = 3
+const MAX_HEALTH = 4
 
 var coins: int
 var lives: int
@@ -43,8 +43,9 @@ func die():
 func getHealth() -> int:
 	return health
 	
-func takeDamage():
-	health -= 1
+func takeDamage(damage):
+	health -= damage
+	health = clamp(health, 0, MAX_HEALTH)
 
 func getStage() -> int:
 	return stage

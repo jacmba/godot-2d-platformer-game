@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name PingPongEnemy
+
 enum EnemyStatus {
 	IDLE,
 	WALKING,
@@ -10,6 +12,8 @@ enum Direction {
 	LEFT = -1,
 	RIGHT = 1
 }
+
+const DAMAGE: int = 1
 
 @export var speed = 2000
 
@@ -41,8 +45,8 @@ func _on_player_detected(body):
 		status = EnemyStatus.DYING
 		anim.play("die")
 		player.velocity.y = -200
-		remove_child(playerDetector)
-		remove_child(wallDetector)
+		playerDetector.queue_free()
+		wallDetector.queue_free()
 		var t = Timer.new()
 		t.wait_time = 2
 		add_child(t)
@@ -50,8 +54,11 @@ func _on_player_detected(body):
 		await t.timeout
 		queue_free()
 	else:
-		get_tree().call_group("death_listeners", "_on_dead")
+		var relative_pos = 1
+		if player.position.x < position.x:
+			relative_pos = -1
+		get_tree().call_group("damage_listeners", "_on_damaged", 1, relative_pos)
 	
 func change_dir():
 	scale.x *= -1
-	direction *= -1
+	direction *= -1 as Direction

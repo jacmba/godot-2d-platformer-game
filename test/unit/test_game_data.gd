@@ -12,7 +12,7 @@ func test_instance_is_not_null():
 func test_initial_data():
 	assert_eq(data.getCoins(), 0, "Coins should be 0")
 	assert_eq(data.getLives(), 3, "Lives should be 3")
-	assert_eq(data.getHealth(), 3, "Health should be 3")
+	assert_eq(data.getHealth(), 4, "Health should be 4")
 	assert_eq(data.getStage(), 1, "Stage should be 1")
 	
 func test_collect_coins():
@@ -28,10 +28,14 @@ func test_decrease_lives():
 	assert_eq(data.getLives(), 3, "Lives should be 3 again")
 	
 func test_take_damage():
-	data.takeDamage()
-	assert_eq(data.getHealth(), 2, "Health should be 2")
+	data.takeDamage(3)
+	assert_eq(data.getHealth(), 1, "Health should be 1")
 	data.restoreLevel()
-	assert_eq(data.getHealth(), 3, "Health should be 3 again")
+	assert_eq(data.getHealth(), 4, "Health should be 3 again")
+	
+func test_take_damage_health_should_not_go_below_zero():
+	data.takeDamage(100)
+	assert_eq(data.getHealth(), 0, "Health should not fall below 0")
 	
 func test_advance_level():
 	data.advanceStage()

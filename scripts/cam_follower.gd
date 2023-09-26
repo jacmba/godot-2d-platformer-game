@@ -7,7 +7,7 @@ extends Camera2D
 @onready var left_boundary: float = boundaries.get_node("Left").position.x
 @onready var right_boundary: float = boundaries.get_node("Right").position.x
 
-func _process(delta):
+func _process(_delta):
 	if player == null:
 		print("Can't get reference to player")
 		return

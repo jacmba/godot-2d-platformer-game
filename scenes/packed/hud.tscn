@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://bs30511hnqtly"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_00kdb"]
+[ext_resource type="Texture2D" uid="uid://bbdfsjc0vrx5n" path="res://rocky_roads/Objects/coin_gold.png" id="2_78u1y"]
+[ext_resource type="PackedScene" uid="uid://bc83mrg1v51tq" path="res://scenes/packed/health_heart.tscn" id="3_lm8ed"]
+[ext_resource type="Texture2D" uid="uid://bt831vrq318j1" path="res://rocky_roads/Enemies/slime_blue.png" id="4_w862e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_20vpd"]
+line_spacing = 0.0
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="CanvasLayer" groups=["coin_listeners", "damage_listeners", "dead_zone_listeners", "death_listeners"]]
+offset = Vector2(600, 300)
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 600, 300)
+script = ExtResource("1_00kdb")
+
+[node name="CoinCounter" type="Label" parent="."]
+offset_left = -120.0
+offset_top = -72.0
+offset_right = -113.0
+offset_bottom = -55.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "0"
+label_settings = SubResource("LabelSettings_20vpd")
+vertical_alignment = 1
+
+[node name="CoinIcon" type="Sprite2D" parent="."]
+position = Vector2(-128, -64)
+texture = ExtResource("2_78u1y")
+hframes = 8
+
+[node name="HealthHeart" parent="." instance=ExtResource("3_lm8ed")]
+position = Vector2(10, -64)
+
+[node name="LivesIcon" type="Sprite2D" parent="."]
+position = Vector2(102, -69)
+texture = ExtResource("4_w862e")
+flip_h = true
+hframes = 5
+vframes = 2
+
+[node name="LivesCounter" type="Label" parent="."]
+offset_left = 114.0
+offset_top = -73.0
+offset_right = 121.0
+offset_bottom = -56.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "0"
+label_settings = SubResource("LabelSettings_20vpd")
+vertical_alignment = 1

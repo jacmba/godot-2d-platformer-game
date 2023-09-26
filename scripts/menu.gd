@@ -1,5 +1,7 @@
 extends Control
 
+class_name Menu
+
 const first_stage = "res://scenes/world/stage1.tscn"
 
 var gamedata: GameData

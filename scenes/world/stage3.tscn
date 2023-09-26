@@ -1,10 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://bl3sooxy5ngip"]
+[gd_scene load_steps=34 format=3 uid="uid://bl3sooxy5ngip"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_i24mc"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_s7crp"]
 [ext_resource type="Texture2D" uid="uid://csktloilix5ai" path="res://rocky_roads/Objects/sign.png" id="3_bhegj"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="4_n6q47"]
-[ext_resource type="Texture2D" uid="uid://bbdfsjc0vrx5n" path="res://rocky_roads/Objects/coin_gold.png" id="5_ct0n7"]
 [ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="6_spcl7"]
 [ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_655ll"]
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_jvdso"]
@@ -13,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/death_trigger.gd" id="10_t6f2l"]
 [ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_xgq10"]
 [ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="11_k5ejf"]
+[ext_resource type="PackedScene" uid="uid://bs30511hnqtly" path="res://scenes/packed/hud.tscn" id="14_hayqj"]
 [ext_resource type="PackedScene" uid="uid://7a8nvmpe835v" path="res://scenes/packed/saw.tscn" id="14_k8jp1"]
 [ext_resource type="PackedScene" uid="uid://bki6p1fgynypd" path="res://scenes/packed/slime_enemy.tscn" id="15_618wg"]
 
@@ -297,12 +296,6 @@ _data = {
 "wave": SubResource("Animation_tpktm")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_20vpd"]
-line_spacing = 0.0
-font_size = 12
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
 [node name="Level" type="Node"]
 
 [node name="Stage" type="TileMap" parent="."]
@@ -518,33 +511,9 @@ speed = 1000
 position = Vector2(728, -24)
 speed = 1000
 
-[node name="HUD" type="CanvasLayer" parent="." groups=["coin_listeners", "dead_zone_listeners", "death_listeners"]]
-offset = Vector2(600, 300)
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 600, 300)
-script = ExtResource("4_n6q47")
-
-[node name="CoinCounter" type="Label" parent="HUD"]
-offset_left = -120.0
-offset_top = -72.0
-offset_right = -113.0
-offset_bottom = -55.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 16
-text = "0"
-label_settings = SubResource("LabelSettings_20vpd")
-vertical_alignment = 1
-
-[node name="CoinIcon" type="Sprite2D" parent="HUD"]
-position = Vector2(-128, -64)
-texture = ExtResource("5_ct0n7")
-hframes = 8
+[node name="HUD" parent="." instance=ExtResource("14_hayqj")]
 
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet" to="Stage/Scenery/Areas/Spikes/SpikeSet" method="_on_trigger_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet2" to="Stage/Scenery/Areas/Spikes/SpikeSet2" method="_on_trigger_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet3" to="Stage/Scenery/Areas/Spikes/SpikeSet3" method="_on_trigger_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet4" to="Stage/Scenery/Areas/Spikes/SpikeSet4" method="_on_trigger_entered"]
-[connection signal="body_entered" from="Stage/Scenery/Goal" to="HUD" method="_on_goal_entered"]
-[connection signal="timeout" from="Stage/Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
-[connection signal="timeout" from="Stage/Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]

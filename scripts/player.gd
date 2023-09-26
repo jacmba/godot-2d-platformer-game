@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
+class_name Player
+
 const speed = 4000
 const jump_force = 250
 const gravity = 600
 const terminal_speed = 5000
 
-var h_velocity
 var motion: float
-var dead
+var dead: bool
 
 
 # Called when the node enters the scene tree for the first time.
@@ -54,6 +55,12 @@ func _on_dead_zone_entered():
 	
 func die():
 	dead = true
+	motion = 0
 	remove_child($CollisionShape2D)
 	velocity.y = -jump_force
 	$AnimationPlayer.play("die")
+	
+func _on_damaged(_damage, pos):
+	velocity.y = -jump_force
+	motion = pos * 3
+	$AnimationPlayer.play("idle")

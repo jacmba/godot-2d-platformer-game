@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc83mrg1v51tq"]
+
+[ext_resource type="Texture2D" uid="uid://bkj14jgtkksrj" path="res://rocky_roads/UI/hearts.png" id="1_rf07c"]
+[ext_resource type="Script" path="res://scripts/health_heart.gd" id="2_d8rd8"]
+
+[node name="HealthHeart" type="Sprite2D"]
+texture = ExtResource("1_rf07c")
+hframes = 4
+script = ExtResource("2_d8rd8")
