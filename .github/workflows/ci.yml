@@ -43,7 +43,7 @@ jobs:
           alias butler=$(pwd)/butler
           butler -v
           butler login
-          butler push build/windows ${ITCH_IO_GAME}:${EXPORT_NAME}-win
+          butler push build/windows ${ITCH_IO_GAME}:win
 
   export-linux:
     name: Linux Export
@@ -80,7 +80,7 @@ jobs:
           alias butler=$(pwd)/butler
           butler -v
           butler login
-          butler push build/linux ${ITCH_IO_GAME}:${EXPORT_NAME}-linux
+          butler push build/linux ${ITCH_IO_GAME}:linux
 
   export-web:
     name: Web Export
@@ -154,4 +154,4 @@ jobs:
           alias butler=$(pwd)/butler
           butler -v
           butler login
-          butler push build/mac ${ITCH_IO_GAME}:${EXPORT_NAME}-mac
+          butler push build/mac ${ITCH_IO_GAME}:mac

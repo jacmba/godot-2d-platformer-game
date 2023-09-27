@@ -36,10 +36,7 @@ func _on_dead_zone_entered():
 func _on_stage_clear_timeout():
 	gameData.advanceStage()
 	var file_name = "res://scenes/world/stage" + str(gameData.getStage()) + ".tscn"
-	if FileAccess.file_exists(file_name):
-		get_tree().change_scene_to_file(file_name)
-	else:
-		exit_to_menu()
+	get_tree().change_scene_to_file(file_name)
 
 func _on_death_timer_timeout():
 	if gameData.getLives() > 0:
