@@ -89,6 +89,7 @@ jobs:
           path: build/web
       - name: Publish to Itch.IO
         run: |
+          apt install curl -y
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
           chmod +x butler
           alias butler=$(pwd)/butler
