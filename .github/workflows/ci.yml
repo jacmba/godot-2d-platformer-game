@@ -34,6 +34,16 @@ jobs:
         with:
           name: windows
           path: build/windows
+      - name: Publish to Itch.IO
+        run: |
+          apt update && apt upgrade -y && apt install curl -y
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          alias butler=$(pwd)/butler
+          butler -v
+          butler login
+          butler push build/windows ${ITCH_IO_GAME}:${EXPORT_NAME}-win
 
   export-linux:
     name: Linux Export
@@ -61,6 +71,16 @@ jobs:
         with:
           name: linux
           path: build/linux
+      - name: Publish to Itch.IO
+        run: |
+          apt update && apt upgrade -y && apt install curl -y
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          alias butler=$(pwd)/butler
+          butler -v
+          butler login
+          butler push build/linux ${ITCH_IO_GAME}:${EXPORT_NAME}-linux
 
   export-web:
     name: Web Export
@@ -98,16 +118,7 @@ jobs:
           butler -v
           butler login
           butler push build/web ${ITCH_IO_GAME}:web
-
-      #- name: Install rsync 📚
-      #  run: |
-      #    apt-get update && apt-get install -y rsync
-      #- name: Deploy to GitHub Pages 🚀
-      #  uses: JamesIves/github-pages-deploy-action@releases/v4
-      #  with:
-      #    branch: gh-pages  The branch the action should deploy to.
-      #    folder: build/web  The folder the action should deploy.
-
+  
   export-mac:
     name: Mac Export
     runs-on: ubuntu-20.04
@@ -134,3 +145,13 @@ jobs:
         with:
           name: mac
           path: build/mac
+      - name: Publish to Itch.IO
+        run: |
+          apt update && apt upgrade -y && apt install curl -y
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          alias butler=$(pwd)/butler
+          butler -v
+          butler login
+          butler push build/mac ${ITCH_IO_GAME}:${EXPORT_NAME}-mac
