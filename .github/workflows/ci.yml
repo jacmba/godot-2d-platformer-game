@@ -55,6 +55,7 @@ jobs:
           mkdir -v -p build/linux
           # cd $PROJECT_PATH
           godot --headless -v --export-release "Linux/X11" build/linux/${EXPORT_NAME}.x86_64
+          ls -l build/linux
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
