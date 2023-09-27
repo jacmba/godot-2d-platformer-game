@@ -47,6 +47,9 @@ jobs:
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
           mkdir -v -p $PROJECT_PATH
+      - name: Run tests
+        run: |
+          godot --headless --debug-collisions --path $(pwd) -d -s addons/gut/gut_cmdln.gd -gconfig=.gut_editor_config.json
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
@@ -56,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: linux
-          path: build/linux
+          path: build/linux/$EXPORT_NAME.x86_64
 #
   #export-web:
   #  name: Web Export
