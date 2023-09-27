@@ -385,3 +385,7 @@ one_shot = true
 one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource("10_p45xr")]
+
+[connection signal="body_entered" from="Stage/Scenery/Goal" to="HUD" method="_on_goal_entered"]
+[connection signal="timeout" from="Stage/Timers/StageClearTimer" to="HUD" method="_on_stage_clear_timeout"]
+[connection signal="timeout" from="Stage/Timers/DeathTimer" to="HUD" method="_on_death_timer_timeout"]
