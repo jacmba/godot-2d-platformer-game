@@ -4,6 +4,7 @@ on: push
 env:
   GODOT_VERSION: 4.1.1
   EXPORT_NAME: slime-squash
+  ITCH_IO_GAME: jacmba/slime-squash
   
 jobs:
   export-windows:
@@ -86,6 +87,15 @@ jobs:
         with:
           name: web
           path: build/web
+      - name: Publish to Itch.IO
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          chmod +x butler
+          alias butler=$(pwd)/butler
+          butler -v
+          butler login
+          butler push build/web ${ITCH_IO_GAME}:web
+
       #- name: Install rsync 📚
       #  run: |
       #    apt-get update && apt-get install -y rsync
