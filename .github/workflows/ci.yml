@@ -54,12 +54,12 @@ jobs:
         run: |
           mkdir -v -p build/linux
           # cd $PROJECT_PATH
-          godot --headless -v --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
+          godot --headless -v --export-release "Linux/X11" build/linux/${EXPORT_NAME}.x86_64
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: linux
-          path: build/linux/$EXPORT_NAME.x86_64
+          path: build/linux/${EXPORT_NAME}.x86_64
 #
   #export-web:
   #  name: Web Export
