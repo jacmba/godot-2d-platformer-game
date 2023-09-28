@@ -46,6 +46,9 @@ func getHealth() -> int:
 func takeDamage(damage):
 	health -= damage
 	health = clamp(health, 0, MAX_HEALTH)
+	
+func powerup(power):
+	takeDamage(-power)
 
 func getStage() -> int:
 	return stage

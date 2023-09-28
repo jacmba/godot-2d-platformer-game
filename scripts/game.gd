@@ -55,3 +55,7 @@ func _on_damaged(damage, _pos):
 	
 func _on_goal_entered(_body):
 	get_parent().get_node("Stage/Timers/StageClearTimer").start()
+	
+func _on_powerup(power):
+	gameData.powerup(power)
+	updateCounters()

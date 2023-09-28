@@ -11,7 +11,7 @@ font_size = 12
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="HUD" type="CanvasLayer" groups=["coin_listeners", "damage_listeners", "dead_zone_listeners", "death_listeners"]]
+[node name="HUD" type="CanvasLayer" groups=["coin_listeners", "damage_listeners", "dead_zone_listeners", "death_listeners", "powerup_listeners"]]
 offset = Vector2(600, 300)
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 600, 300)

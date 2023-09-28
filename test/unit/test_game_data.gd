@@ -6,6 +6,10 @@ func before_all():
 	gut.p("Starting tests")
 	data = GameData.getInstance()
 	
+func before_each():
+	data.restoreLevel()
+	data.newGame()
+	
 func test_instance_is_not_null():
 	assert_not_null(data, "Game data instance should not be null")
 	
@@ -42,3 +46,13 @@ func test_advance_level():
 	assert_eq(data.getStage(), 2, "Stage should be 2")
 	data.newGame()
 	assert_eq(data.getStage(), 1, "Stage should be 1 again")
+	
+func test_powerup():
+	data.takeDamage(2)
+	assert_eq(data.getHealth(), 2, "Health should be 2")
+	data.powerup(1)
+	assert_eq(data.getHealth(), 3, "Health should be 3")
+	
+func test_powerUpShouldNotGoBeyondMaximum():
+	data.powerup(5)
+	assert_eq(data.getHealth(), 4, "Health should not go beyond 4")

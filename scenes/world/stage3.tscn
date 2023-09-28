@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bl3sooxy5ngip"]
+[gd_scene load_steps=36 format=3 uid="uid://bl3sooxy5ngip"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_i24mc"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_s7crp"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://qpykc73otcha" path="res://rocky_roads/Enemies/spikes.png" id="10_r2ggb"]
 [ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_xgq10"]
 [ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="11_k5ejf"]
+[ext_resource type="PackedScene" uid="uid://c281wdt5k5cq1" path="res://scenes/packed/item_box.tscn" id="13_713dt"]
 [ext_resource type="PackedScene" uid="uid://bs30511hnqtly" path="res://scenes/packed/hud.tscn" id="14_hayqj"]
 [ext_resource type="PackedScene" uid="uid://7a8nvmpe835v" path="res://scenes/packed/saw.tscn" id="14_k8jp1"]
 [ext_resource type="PackedScene" uid="uid://bki6p1fgynypd" path="res://scenes/packed/slime_enemy.tscn" id="15_618wg"]
@@ -460,6 +461,17 @@ position = Vector2(600, -40)
 
 [node name="Coin7" parent="Stage/Objects/Coins" groups=["coins"] instance=ExtResource("10_xgq10")]
 position = Vector2(744, -40)
+
+[node name="Items" type="Node" parent="Stage/Objects"]
+
+[node name="ItemBox" parent="Stage/Objects/Items" instance=ExtResource("13_713dt")]
+position = Vector2(96, 8)
+
+[node name="ItemBox2" parent="Stage/Objects/Items" instance=ExtResource("13_713dt")]
+position = Vector2(112, 8)
+
+[node name="ItemBox3" parent="Stage/Objects/Items" instance=ExtResource("13_713dt")]
+position = Vector2(80, 8)
 
 [node name="Player" parent="Stage" instance=ExtResource("11_k5ejf")]
 position = Vector2(-133, 24)
