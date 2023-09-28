@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://m43rnabm2a4b"]
+[gd_scene load_steps=11 format=3 uid="uid://m43rnabm2a4b"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_73eie"]
 [ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="1_pckns"]
 [ext_resource type="Texture2D" uid="uid://qf6n6o27f1mr" path="res://rocky_roads/Backgrounds/mountains_a.png" id="2_0o6nv"]
 [ext_resource type="Texture2D" uid="uid://mjpgpdf0ou4s" path="res://rocky_roads/Backgrounds/mountains_b.png" id="2_iednn"]
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="3_yk27u"]
+[ext_resource type="Material" uid="uid://cftpqa16tsqvg" path="res://materials/coinMaterial.tres" id="6_qf8xo"]
 
 [sub_resource type="Theme" id="Theme_rxc1g"]
 
@@ -13,6 +14,15 @@ default_font_size = 48
 
 [sub_resource type="Theme" id="Theme_6wbaj"]
 default_font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_201jv"]
+font_size = 120
+font_color = Color(1, 1, 0.270588, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0.184314, 0.184314, 0.184314, 0.329412)
+shadow_offset = Vector2(10, 10)
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -67,9 +77,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -60.5
-offset_top = -77.0
+offset_top = 76.0
 offset_right = 60.5
-offset_bottom = 77.0
+offset_bottom = 230.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_rxc1g")
@@ -91,6 +101,20 @@ text = "Start"
 layout_mode = 2
 theme = SubResource("Theme_6wbaj")
 text = "Exit"
+
+[node name="Title" type="Label" parent="."]
+z_index = 100
+material = ExtResource("6_qf8xo")
+layout_mode = 2
+offset_left = 171.0
+offset_top = 124.0
+offset_right = 989.0
+offset_bottom = 422.0
+rotation = -0.13439
+text = "Slime Squash!"
+label_settings = SubResource("LabelSettings_201jv")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="UI/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UI/ExitButton" to="." method="_on_exit_button_pressed"]

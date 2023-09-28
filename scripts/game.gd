@@ -42,7 +42,7 @@ func _on_death_timer_timeout():
 	if gameData.getLives() > 0:
 		get_tree().reload_current_scene()
 	else:
-		exit_to_menu()
+		get_tree().change_scene_to_file("res://scenes/world/gameover.tscn")
 	
 func _on_dead():
 	die()

@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxof7rje1e6qy"]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_3hg0t"]
+[ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="2_2oyxs"]
+[ext_resource type="Texture2D" uid="uid://qf6n6o27f1mr" path="res://rocky_roads/Backgrounds/mountains_a.png" id="3_mucfx"]
+[ext_resource type="Texture2D" uid="uid://mjpgpdf0ou4s" path="res://rocky_roads/Backgrounds/mountains_b.png" id="4_j2hgr"]
+[ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="5_omlfl"]
+
+[sub_resource type="Theme" id="Theme_rxc1g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h6ajp"]
+font_size = 120
+font_color = Color(1, 0.168627, 0.168627, 1)
+outline_size = 20
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3hg0t")
+
+[node name="Background" type="Node" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2oyxs")
+flip_v = true
+
+[node name="TextureRect2" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mucfx")
+
+[node name="TextureRect4" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_j2hgr")
+
+[node name="TextureRect3" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_omlfl")
+
+[node name="Panel" type="ColorRect" parent="."]
+z_index = 1
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.709804)
+
+[node name="UI" type="VBoxContainer" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rxc1g")
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="UI"]
+z_index = 2
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_h6ajp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressKeyLabel" type="Label" parent="UI"]
+z_index = 2
+layout_mode = 2
+text = "Press any key to return to menu"
+horizontal_alignment = 1
+vertical_alignment = 2
