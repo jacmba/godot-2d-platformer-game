@@ -22,8 +22,8 @@
  "opacity": 100,
  "paint_after": 0.1,
  "panel_options": {
-  "font_name": "AnonymousPro",
-  "font_size": 16,
+  "font_name": "CourierPrime",
+  "font_size": 30,
   "hide_output_text": false,
   "hide_result_tree": false,
   "hide_settings": false,

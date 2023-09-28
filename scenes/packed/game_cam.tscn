@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dctac3vkoen7a"]
 
 [ext_resource type="Script" path="res://scripts/cam_follower.gd" id="1_edafj"]
-[ext_resource type="Script" path="res://scripts/deadZone.gd" id="2_qrej2"]
+[ext_resource type="Script" path="res://scripts/dead_zone.gd" id="2_qrej2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tna0"]
 size = Vector2(512, 104)

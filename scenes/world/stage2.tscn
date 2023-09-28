@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://co2i0mciyr0iq"]
+[gd_scene load_steps=31 format=3 uid="uid://co2i0mciyr0iq"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_2ovgi"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_pqsag"]
@@ -10,7 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_sm4ft"]
 [ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_81ln4"]
 [ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="11_dyu70"]
-[ext_resource type="PackedScene" uid="uid://bs30511hnqtly" path="res://scenes/packed/hud.tscn" id="11_x3csq"]
+[ext_resource type="PackedScene" path="res://scenes/packed/hud.tscn" id="11_x3csq"]
+[ext_resource type="PackedScene" path="res://scenes/packed/slime_enemy.tscn" id="12_td6by"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_gbeb3"]
 tile_data = PackedInt32Array(0, 131072, 1, 1, 196608, 1, 2, 262144, 1, 3, 327680, 1)
@@ -203,7 +204,7 @@ pattern_5 = SubResource("TileMapPattern_yurt0")
 pattern_6 = SubResource("TileMapPattern_wgn22")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pghuy"]
-size = Vector2(80, 104)
+size = Vector2(72, 104)
 
 [sub_resource type="Animation" id="Animation_nq1pc"]
 length = 0.001
@@ -338,7 +339,7 @@ collision_layer = 32768
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Goal"]
-position = Vector2(27, -14)
+position = Vector2(31, -14)
 shape = SubResource("RectangleShape2D_pghuy")
 
 [node name="GameCam" parent="Stage" instance=ExtResource("7_3ju5u")]
@@ -422,6 +423,17 @@ one_shot = true
 
 [node name="Right" type="Node2D" parent="Stage/Boundaries"]
 position = Vector2(608, 0)
+
+[node name="Enemies" type="Node" parent="Stage"]
+
+[node name="SlimeEnemy" parent="Stage/Enemies" instance=ExtResource("12_td6by")]
+position = Vector2(168, 24)
+
+[node name="SlimeEnemy2" parent="Stage/Enemies" instance=ExtResource("12_td6by")]
+position = Vector2(392, -8)
+
+[node name="SlimeEnemy3" parent="Stage/Enemies" instance=ExtResource("12_td6by")]
+position = Vector2(568, 56)
 
 [node name="HUD" parent="." instance=ExtResource("11_x3csq")]
 

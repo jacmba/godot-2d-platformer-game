@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bf7b1n21ao4je"]
+[gd_scene load_steps=27 format=3 uid="uid://bf7b1n21ao4je"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_k4m6h"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_yosi7"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dctac3vkoen7a" path="res://scenes/packed/game_cam.tscn" id="7_1j7k8"]
 [ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_md4jf"]
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_ypsck"]
-[ext_resource type="PackedScene" uid="uid://bs30511hnqtly" path="res://scenes/packed/hud.tscn" id="10_p45xr"]
+[ext_resource type="PackedScene" path="res://scenes/packed/hud.tscn" id="10_p45xr"]
 [ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_y0l7i"]
+[ext_resource type="PackedScene" path="res://scenes/packed/slime_enemy.tscn" id="11_b835w"]
 [ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="11_o0esj"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_gbeb3"]
@@ -190,7 +191,7 @@ pattern_2 = SubResource("TileMapPattern_ag1g6")
 pattern_3 = SubResource("TileMapPattern_orf5n")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ykqbj"]
-size = Vector2(80, 104)
+size = Vector2(72, 104)
 
 [sub_resource type="Animation" id="Animation_nq1pc"]
 length = 0.001
@@ -268,7 +269,7 @@ _data = {
 "wave": SubResource("Animation_tpktm")
 }
 
-[node name="Level" type="Node"]
+[node name="Level2" type="Node"]
 
 [node name="Stage" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_t2dct")
@@ -305,7 +306,7 @@ collision_layer = 32768
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Goal"]
-position = Vector2(24, -20)
+position = Vector2(28, -20)
 shape = SubResource("RectangleShape2D_ykqbj")
 
 [node name="GameCam" parent="Stage" instance=ExtResource("7_1j7k8")]
@@ -374,6 +375,9 @@ position = Vector2(-48, -8)
 
 [node name="Right" type="Node2D" parent="Stage/Boundaries"]
 position = Vector2(536, 0)
+
+[node name="SlimeEnemy" parent="Stage" instance=ExtResource("11_b835w")]
+position = Vector2(160, -8)
 
 [node name="Timers" type="Node" parent="Stage"]
 

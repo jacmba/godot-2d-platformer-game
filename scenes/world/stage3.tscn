@@ -1,19 +1,20 @@
-[gd_scene load_steps=34 format=3 uid="uid://bl3sooxy5ngip"]
+[gd_scene load_steps=35 format=3 uid="uid://bl3sooxy5ngip"]
 
 [ext_resource type="Texture2D" uid="uid://or7qx3bylf80" path="res://rocky_roads/Tilesets/tileset_forest.png" id="1_i24mc"]
 [ext_resource type="Texture2D" uid="uid://c7dmdwmntia06" path="res://rocky_roads/Deco/clouds.png" id="2_s7crp"]
 [ext_resource type="Texture2D" uid="uid://csktloilix5ai" path="res://rocky_roads/Objects/sign.png" id="3_bhegj"]
+[ext_resource type="PackedScene" uid="uid://q6ourh68sboo" path="res://scenes/packed/spike_set.tscn" id="5_x2hd2"]
+[ext_resource type="Script" path="res://scripts/scenery_damager.gd" id="6_rodev"]
 [ext_resource type="Texture2D" uid="uid://nlanr00q3m0m" path="res://rocky_roads/Deco/water_a_8frames.png" id="6_spcl7"]
 [ext_resource type="Texture2D" uid="uid://djtqc4iegjyk" path="res://rocky_roads/Deco/sun.png" id="7_655ll"]
 [ext_resource type="Texture2D" uid="uid://hu8ug54k5h6c" path="res://rocky_roads/Backgrounds/trees.png" id="8_jvdso"]
 [ext_resource type="PackedScene" uid="uid://dctac3vkoen7a" path="res://scenes/packed/game_cam.tscn" id="9_fajyd"]
 [ext_resource type="Texture2D" uid="uid://qpykc73otcha" path="res://rocky_roads/Enemies/spikes.png" id="10_r2ggb"]
-[ext_resource type="Script" path="res://scripts/death_trigger.gd" id="10_t6f2l"]
 [ext_resource type="PackedScene" uid="uid://cjj0s16uapswj" path="res://scenes/packed/coin.tscn" id="10_xgq10"]
 [ext_resource type="PackedScene" uid="uid://0pxk3tcg3l60" path="res://scenes/packed/player.tscn" id="11_k5ejf"]
-[ext_resource type="PackedScene" uid="uid://bs30511hnqtly" path="res://scenes/packed/hud.tscn" id="14_hayqj"]
+[ext_resource type="PackedScene" path="res://scenes/packed/hud.tscn" id="14_hayqj"]
 [ext_resource type="PackedScene" uid="uid://7a8nvmpe835v" path="res://scenes/packed/saw.tscn" id="14_k8jp1"]
-[ext_resource type="PackedScene" uid="uid://bki6p1fgynypd" path="res://scenes/packed/slime_enemy.tscn" id="15_618wg"]
+[ext_resource type="PackedScene" path="res://scenes/packed/slime_enemy.tscn" id="15_618wg"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_gbeb3"]
 tile_data = PackedInt32Array(0, 131072, 1, 1, 196608, 1, 2, 262144, 1, 3, 327680, 1)
@@ -218,7 +219,7 @@ pattern_6 = SubResource("TileMapPattern_wgn22")
 size = Vector2(22, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mgk8v"]
-size = Vector2(80, 104)
+size = Vector2(72, 104)
 
 [sub_resource type="Animation" id="Animation_nq1pc"]
 length = 0.001
@@ -334,26 +335,12 @@ texture = ExtResource("8_jvdso")
 
 [node name="Spikes" type="Node" parent="Stage/Scenery/Areas"]
 
-[node name="SpikeSet" type="Area2D" parent="Stage/Scenery/Areas/Spikes"]
-position = Vector2(-104, 60)
-collision_mask = 512
-script = ExtResource("10_t6f2l")
-
-[node name="Sprite2D" type="Sprite2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet"]
-position = Vector2(8, -8.5)
-scale = Vector2(2, 1.5625)
-texture = ExtResource("10_r2ggb")
-hframes = 4
-frame = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet"]
-position = Vector2(8, -2)
-shape = SubResource("RectangleShape2D_cl3vc")
+[node name="SpikeSet" parent="Stage/Scenery/Areas/Spikes" instance=ExtResource("5_x2hd2")]
 
 [node name="SpikeSet2" type="Area2D" parent="Stage/Scenery/Areas/Spikes"]
 position = Vector2(184, -35)
 collision_mask = 512
-script = ExtResource("10_t6f2l")
+script = ExtResource("6_rodev")
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet2"]
 position = Vector2(8, -8.5)
@@ -369,7 +356,7 @@ shape = SubResource("RectangleShape2D_cl3vc")
 [node name="SpikeSet3" type="Area2D" parent="Stage/Scenery/Areas/Spikes"]
 position = Vector2(424, -20)
 collision_mask = 512
-script = ExtResource("10_t6f2l")
+script = ExtResource("6_rodev")
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet3"]
 position = Vector2(8, -8.5)
@@ -385,7 +372,7 @@ shape = SubResource("RectangleShape2D_cl3vc")
 [node name="SpikeSet4" type="Area2D" parent="Stage/Scenery/Areas/Spikes"]
 position = Vector2(544, -4)
 collision_mask = 512
-script = ExtResource("10_t6f2l")
+script = ExtResource("6_rodev")
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage/Scenery/Areas/Spikes/SpikeSet4"]
 position = Vector2(8, -8.5)
@@ -412,7 +399,7 @@ collision_layer = 32768
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Scenery/Goal"]
-position = Vector2(24, -11)
+position = Vector2(28, -11)
 shape = SubResource("RectangleShape2D_mgk8v")
 
 [node name="GameCam" parent="Stage" instance=ExtResource("9_fajyd")]
@@ -513,7 +500,6 @@ speed = 1000
 
 [node name="HUD" parent="." instance=ExtResource("14_hayqj")]
 
-[connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet" to="Stage/Scenery/Areas/Spikes/SpikeSet" method="_on_trigger_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet2" to="Stage/Scenery/Areas/Spikes/SpikeSet2" method="_on_trigger_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet3" to="Stage/Scenery/Areas/Spikes/SpikeSet3" method="_on_trigger_entered"]
 [connection signal="body_entered" from="Stage/Scenery/Areas/Spikes/SpikeSet4" to="Stage/Scenery/Areas/Spikes/SpikeSet4" method="_on_trigger_entered"]
