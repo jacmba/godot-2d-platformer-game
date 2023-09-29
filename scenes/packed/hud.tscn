@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs30511hnqtly"]
+[gd_scene load_steps=8 format=3 uid="uid://bs30511hnqtly"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_00kdb"]
 [ext_resource type="AudioStream" uid="uid://djli1jq8odfd7" path="res://sound/coin_collect.wav" id="2_5sr67"]
 [ext_resource type="Texture2D" uid="uid://bbdfsjc0vrx5n" path="res://rocky_roads/Objects/coin_gold.png" id="2_78u1y"]
 [ext_resource type="PackedScene" uid="uid://bc83mrg1v51tq" path="res://scenes/packed/health_heart.tscn" id="3_lm8ed"]
 [ext_resource type="Texture2D" uid="uid://bt831vrq318j1" path="res://rocky_roads/Enemies/slime_blue.png" id="4_w862e"]
+[ext_resource type="AudioStream" uid="uid://dehveqoip4e3m" path="res://sound/2D Platform Action.mp3" id="6_kgwdh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_20vpd"]
 line_spacing = 0.0
@@ -58,4 +59,7 @@ text = "0"
 label_settings = SubResource("LabelSettings_20vpd")
 vertical_alignment = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="FXSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_kgwdh")

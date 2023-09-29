@@ -7,11 +7,13 @@ class_name Game
 @onready var coin_counter: Label = $CoinCounter
 @onready var gameData: GameData = GameData.getInstance()
 @onready var lives_counter: Label = $LivesCounter
-@onready var player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var player: AudioStreamPlayer2D = $FXSound
+@onready var music_player: AudioStreamPlayer2D = $Music
 
 func _ready():
 	gameData.restoreLevel()
 	updateCounters()
+	music_player.play()
 	
 func updateCounters():
 	coin_counter.text = str(gameData.getCoins())
@@ -43,6 +45,7 @@ func _on_stage_clear_timeout():
 	get_tree().change_scene_to_file(file_name)
 
 func _on_death_timer_timeout():
+	music_player.stop()
 	if gameData.getLives() > 0:
 		get_tree().reload_current_scene()
 	else:
@@ -58,6 +61,7 @@ func _on_damaged(damage, _pos):
 		get_tree().call_group("death_listeners", "_on_dead")
 	
 func _on_goal_entered(_body):
+	music_player.stop()
 	get_parent().get_node("Stage/Timers/StageClearTimer").start()
 	
 func _on_powerup(power):
