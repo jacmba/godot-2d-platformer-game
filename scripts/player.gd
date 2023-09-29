@@ -10,6 +10,11 @@ const terminal_speed = 5000
 var motion: float
 var dead: bool
 
+@export var jump_sound: AudioStream
+@export var damage_sound: AudioStream
+@export var die_sound: AudioStream
+
+@onready var player: AudioStreamPlayer2D = $AudioStreamPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,6 +51,8 @@ func _physics_process(delta):
 	
 	if not dead and Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -jump_force
+		player.stream = jump_sound
+		player.play()
 		
 func _on_dead():
 	die()
@@ -57,10 +64,14 @@ func die():
 	dead = true
 	motion = 0
 	remove_child($CollisionShape2D)
-	velocity.y = -jump_force
+	velocity.y = -jump_force * 1.5
+	player.stream = die_sound
+	player.play()
 	$AnimationPlayer.play("die")
 	
 func _on_damaged(_damage, pos):
 	velocity.y = -jump_force
 	motion = pos * 3
 	$AnimationPlayer.play("idle")
+	player.stream = damage_sound
+	player.play()

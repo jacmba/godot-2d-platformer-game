@@ -16,11 +16,13 @@ enum Direction {
 const DAMAGE: int = 1
 
 @export var speed = 2000
+@export var squash_sound: AudioStream
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var ray: = $RayCast2D
 @onready var playerDetector: Area2D = $PlayerDetector
 @onready var wallDetector: Area2D = $WallDetector
+@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var direction: Direction = Direction.LEFT
 var status: EnemyStatus = EnemyStatus.WALKING
@@ -42,6 +44,8 @@ func _on_player_detected(body):
 		
 	var player: CharacterBody2D = body as CharacterBody2D
 	if player.velocity.y > 0:
+		audio_player.stream = squash_sound
+		audio_player.play()
 		status = EnemyStatus.DYING
 		anim.play("die")
 		player.velocity.y = -200

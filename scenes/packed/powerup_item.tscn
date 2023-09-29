@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmd3jeggncpr0"]
+[gd_scene load_steps=10 format=3 uid="uid://bmd3jeggncpr0"]
 
 [ext_resource type="Texture2D" uid="uid://cacjvq3bmsmha" path="res://rocky_roads/Objects/apple.png" id="1_jkono"]
 [ext_resource type="Script" path="res://scripts/powerup_item.gd" id="1_wsxb1"]
+[ext_resource type="AudioStream" uid="uid://cacfwfq6lmgi6" path="res://sound/powerup.wav" id="3_yt4pr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dw02b"]
 size = Vector2(16, 16)
@@ -105,5 +106,8 @@ autoplay = "beat"
 libraries = {
 "": SubResource("AnimationLibrary_pytem")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_yt4pr")
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_powerup_collected"]

@@ -2,9 +2,12 @@ extends Node
 
 class_name Game
 
+@export var coin_collect_sound: AudioStream
+
 @onready var coin_counter: Label = $CoinCounter
 @onready var gameData: GameData = GameData.getInstance()
 @onready var lives_counter: Label = $LivesCounter
+@onready var player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready():
 	gameData.restoreLevel()
@@ -27,6 +30,7 @@ func exit_to_menu():
 	get_tree().change_scene_to_file("res://scenes/world/menu.tscn")
 
 func _on_coin_collected():
+	playStream(coin_collect_sound)
 	gameData.collectCoin()
 	updateCounters()
 
@@ -59,3 +63,7 @@ func _on_goal_entered(_body):
 func _on_powerup(power):
 	gameData.powerup(power)
 	updateCounters()
+	
+func playStream(stream: AudioStream):
+	player.stream = stream
+	player.play()

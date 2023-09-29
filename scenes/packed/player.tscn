@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://0pxk3tcg3l60"]
+[gd_scene load_steps=12 format=3 uid="uid://0pxk3tcg3l60"]
 
 [ext_resource type="Texture2D" uid="uid://bt831vrq318j1" path="res://rocky_roads/Enemies/slime_blue.png" id="1_3s1pi"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nct4o"]
+[ext_resource type="AudioStream" uid="uid://c6sj2wo6coqn" path="res://sound/jump.wav" id="2_o0gmm"]
+[ext_resource type="AudioStream" uid="uid://bptut8i1kp5lm" path="res://sound/hurt.wav" id="3_m1u4x"]
+[ext_resource type="AudioStream" uid="uid://bqtxfy28isi3i" path="res://sound/die.wav" id="4_mydld"]
 
 [sub_resource type="Animation" id="Animation_v7rqd"]
 length = 0.001
@@ -82,6 +85,9 @@ size = Vector2(12, 7)
 z_index = 10
 collision_layer = 512
 script = ExtResource("1_nct4o")
+jump_sound = ExtResource("2_o0gmm")
+damage_sound = ExtResource("3_m1u4x")
+die_sound = ExtResource("4_mydld")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3s1pi")
@@ -98,3 +104,5 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_0rm3u")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]

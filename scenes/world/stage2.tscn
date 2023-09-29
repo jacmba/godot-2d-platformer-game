@@ -406,7 +406,7 @@ position = Vector2(680, 0)
 [node name="Items" type="Node" parent="Stage/Objects"]
 
 [node name="ItemPowerup" parent="Stage/Objects/Items" instance=ExtResource("14_nnfsg")]
-position = Vector2(88, -64)
+position = Vector2(192, -5)
 item = ExtResource("13_ym4k8")
 
 [node name="ItemBoxEmpty" parent="Stage/Objects/Items" instance=ExtResource("14_nnfsg")]
@@ -414,6 +414,9 @@ position = Vector2(-48, -24)
 
 [node name="ItemBoxEmpty2" parent="Stage/Objects/Items" instance=ExtResource("14_nnfsg")]
 position = Vector2(224, 16)
+
+[node name="ItemBoxEmpty4" parent="Stage/Objects/Items" instance=ExtResource("14_nnfsg")]
+position = Vector2(88, -64)
 
 [node name="ItemBoxEmpty3" parent="Stage/Objects/Items" instance=ExtResource("14_nnfsg")]
 position = Vector2(240, 16)

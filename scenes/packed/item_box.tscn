@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c281wdt5k5cq1"]
+[gd_scene load_steps=10 format=3 uid="uid://c281wdt5k5cq1"]
 
 [ext_resource type="Script" path="res://scripts/item_box.gd" id="1_57qsv"]
 [ext_resource type="Texture2D" uid="uid://b5tsifg5m3ta" path="res://rocky_roads/Objects/crate.png" id="1_tn4nt"]
+[ext_resource type="AudioStream" uid="uid://cnerf55sf1ikb" path="res://sound/break_box.wav" id="2_5f2wk"]
 
 [sub_resource type="Animation" id="Animation_67lmv"]
 resource_name = "idle"
@@ -75,5 +76,8 @@ collision_mask = 512
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BreakDetector"]
 position = Vector2(0, 8.5)
 shape = SubResource("RectangleShape2D_p3kwr")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_5f2wk")
 
 [connection signal="body_entered" from="BreakDetector" to="." method="_on_broken"]
