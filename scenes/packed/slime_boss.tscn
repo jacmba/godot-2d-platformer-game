@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://cvkcflh862vkj"]
+
+[ext_resource type="Texture2D" uid="uid://c8dgf5i1qskgi" path="res://rocky_roads/Enemies/slime_red.png" id="1_1rng0"]
+[ext_resource type="Script" path="res://scripts/slime_boss.gd" id="1_8d83a"]
+[ext_resource type="AudioStream" uid="uid://dbn45ft5pp1sn" path="res://sound/squash.wav" id="2_ki202"]
+[ext_resource type="Material" uid="uid://crtl6p3076rf4" path="res://materials/standard_material.tres" id="3_qxl60"]
+
+[sub_resource type="Animation" id="Animation_3c0ap"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ojv2l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sb02y"]
+resource_name = "move"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_j5e4f"]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2iird"]
+_data = {
+"RESET": SubResource("Animation_ojv2l"),
+"die": SubResource("Animation_j5e4f"),
+"idle": SubResource("Animation_3c0ap"),
+"move": SubResource("Animation_sb02y")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5153"]
+size = Vector2(10.6667, 2.66667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjgqs"]
+size = Vector2(16, 5.33333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhv5l"]
+size = Vector2(8.33333, 4.33333)
+
+[node name="SlimeBoss" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+collision_layer = 2
+script = ExtResource("1_8d83a")
+squash_sound = ExtResource("2_ki202")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("3_qxl60")
+texture = ExtResource("1_1rng0")
+hframes = 5
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "move"
+libraries = {
+"": SubResource("AnimationLibrary_2iird")
+}
+
+[node name="StatusTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6.66667)
+shape = SubResource("RectangleShape2D_e5153")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(0, 5.33333)
+shape = SubResource("RectangleShape2D_qjgqs")
+
+[node name="PlayerHitZone" type="Area2D" parent="."]
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitZone"]
+position = Vector2(0.166667, 0.5)
+shape = SubResource("RectangleShape2D_jhv5l")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="timeout" from="StatusTimer" to="." method="_on_status_change"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detected"]
+[connection signal="body_entered" from="PlayerHitZone" to="." method="_on_player_hit"]

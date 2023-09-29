@@ -61,7 +61,7 @@ func _on_player_detected(body):
 		var relative_pos = 1
 		if player.position.x < position.x:
 			relative_pos = -1
-		get_tree().call_group("damage_listeners", "_on_damaged", 1, relative_pos)
+		get_tree().call_group("damage_listeners", "_on_damaged", DAMAGE, relative_pos)
 	
 func change_dir():
 	scale.x *= -1

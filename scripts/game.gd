@@ -3,6 +3,7 @@ extends Node
 class_name Game
 
 @export var coin_collect_sound: AudioStream
+@export var music_sound: AudioStream
 
 @onready var coin_counter: Label = $CoinCounter
 @onready var gameData: GameData = GameData.getInstance()
@@ -13,6 +14,8 @@ class_name Game
 func _ready():
 	gameData.restoreLevel()
 	updateCounters()
+	if music_sound != null:
+		music_player.stream = music_sound
 	music_player.play()
 	
 func updateCounters():
@@ -71,3 +74,7 @@ func _on_powerup(power):
 func playStream(stream: AudioStream):
 	player.stream = stream
 	player.play()
+	
+func _on_boss_killed():
+	music_player.stop()
+	get_parent().get_node("Stage/Timers/StageClearTimer").start()
